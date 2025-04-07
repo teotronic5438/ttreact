@@ -1,0 +1,56 @@
+.contenedor {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 50px;
+  }
+
+  .caja {
+    width: 100px;
+    height: 100px;
+    background-color: lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 10px;
+    transition: all 0.5s ease;
+  }
+
+  .boton {
+    margin-top: 10px;
+  }
+
+  /* Animaciones */
+  .rotar {
+    animation: rotar 1s forwards;
+  }
+
+  @keyframes rotar {
+    to { transform: rotate(360deg); }
+  }
+
+  .escalar {
+    animation: escalar 0.5s forwards;
+  }
+
+  @keyframes escalar {
+    to { transform: scale(1.5); }
+  }
+
+  .mover {
+    animation: mover 0.7s forwards;
+  }
+
+  @keyframes mover {
+    to { transform: translateX(50px); }
+  }
+
+  .color {
+    animation: cambiarColor 1s forwards;
+  }
+
+  @keyframes cambiarColor {
+    to { background-color: tomato; }
+  }
