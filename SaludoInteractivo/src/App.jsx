@@ -39,6 +39,11 @@ function App() {
         {contador == 0 ? <p>No hiciste click</p> : (contador == 1 ? <p>Hiciste 1 click</p> : <p>Hiciste {contador} clicks</p>) }
       </div>
 
+      <div className="booleano">
+        <p>Prueba de luz</p>
+        <i class="fa-solid fa-lightbulb"></i>
+      </div>
+
     </>
   )
 }
