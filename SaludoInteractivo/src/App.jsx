@@ -6,6 +6,7 @@ import './App.css'
 function App() {
   const [nombre, setNombre] = useState("")
   const [contador, setContador] = useState(0)
+  const [enncenderLuz, setEncenderLuz] = useState(false)
 
   return (
     <>
@@ -41,7 +42,9 @@ function App() {
 
       <div className="booleano">
         <p>Prueba de luz</p>
-        <i class="fa-solid fa-lightbulb"></i>
+        <i className="fa-solid fa-lightbulb"  style={{ color: enncenderLuz ? "yellow" : "gray" }}></i>
+        <br />
+        <button onClick={() => setEncenderLuz(!enncenderLuz)}>{enncenderLuz ? "Apagar" : "Encender"}</button>
       </div>
 
     </>
