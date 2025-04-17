@@ -1,0 +1,10 @@
+.acciones-contenedor {
+    display: flex;
+    gap: 10px; /* 👈 Espacio automático entre botones */
+    align-items: center;
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+  }
+  
