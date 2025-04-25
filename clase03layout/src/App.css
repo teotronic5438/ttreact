@@ -18,6 +18,18 @@
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
+.equipo-grid {
+  display: grid;
+  grid-auto-flow: column; /* organiza en una sola fila */
+  gap: 1rem; /* separa cada tarjeta */
+  padding: 1rem;
+  overflow-x: auto; /* opcional si tenés muchas tarjetas */
+}
+.imagen-card{
+  border-radius: 50%;
+}
+
+
 @keyframes logo-spin {
   from {
     transform: rotate(0deg);
