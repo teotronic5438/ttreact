@@ -10,6 +10,7 @@ import Header from './components/Header'
 import Main from './components/Main'
 import Nav from './components/Nav'
 import Video from './components/Video'
+import TarjetaProyecto from './components/TarjetaProyecto'
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -35,6 +36,11 @@ function App() {
       {/* <Main /> */}
       {/* <Gallery /> */}
       <EquipoTalentoLab equipo={equipo} />
+      <TarjetaProyecto
+      titulo="Plataforma de Gestión"
+      descripcion="Una herramienta para optimizar la gestión de equipos."
+      botonTexto="Explorar proyecto"
+      />
       <Footer />
       {/* <Video video={videoData} /> */}
     </>
