@@ -11,6 +11,7 @@ import Main from './components/Main'
 import Nav from './components/Nav'
 import Video from './components/Video'
 import TarjetaProyecto from './components/TarjetaProyecto'
+import GaleriaIntereses from './components/GaleriaIntereses'
 
 function App() {
   // const [count, setCount] = useState(0)
@@ -29,6 +30,8 @@ function App() {
     count: 0
   };
 
+  const intereses = ['React', 'JavaScript', 'APIs', 'Diseño UX', 'Node.js'];
+
   return (
     <>
       <Header />
@@ -37,10 +40,11 @@ function App() {
       {/* <Gallery /> */}
       <EquipoTalentoLab equipo={equipo} />
       <TarjetaProyecto
-      titulo="Plataforma de Gestión"
-      descripcion="Una herramienta para optimizar la gestión de equipos."
-      botonTexto="Explorar proyecto"
+        titulo="Plataforma de Gestión"
+        descripcion="Una herramienta para optimizar la gestión de equipos."
+        botonTexto="Explorar proyecto"
       />
+      <GaleriaIntereses intereses={intereses} />
       <Footer />
       {/* <Video video={videoData} /> */}
     </>
