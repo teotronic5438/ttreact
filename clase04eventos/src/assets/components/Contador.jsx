@@ -9,9 +9,9 @@ function Contador() {
         <div className="contador">
             {/* Contador Numero 1 */}
             <h2>Contador: {contador}</h2>
-            <button onClick={() => setContador(contador + 1)}>Incrementar</button>
-            <button onClick={() => setContador(contador - 1)}>Decrementar</button>
-            <button onClick={() => setContador(0)}>Reiniciar</button>
+            <button className='input-nombre' onClick={() => setContador(contador + 1)}>Incrementar</button>
+            <button className='input-nombre' onClick={() => setContador(contador - 1)}>Decrementar</button>
+            <button className='input-nombre' onClick={() => setContador(0)}>Reiniciar</button>
 
             {/* Contador Numero 2 */}
             <h2>Variable: {variable}</h2>

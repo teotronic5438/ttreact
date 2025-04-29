@@ -7,15 +7,25 @@ export default function Formulario() {
 
     function manejarSubmit(event) {
         event.preventDefault(); // Evitar el comportamiento por defecto del formulario
-        alert(`Hola: ${nombre}!!`); // Mostrar el nombre ingresado en una alerta
-        setNombre(""); // Limpiar el campo de texto después de enviar el formulario
-        // Aquí puedes agregar más lógica para manejar el envío del formulario, como enviar datos a un servidor o realizar otras acciones.
+        console.log(event);  // para ver en consola el evento
+        console.log(event.target);
+        // console.log(event.target.value);
+        
+        if (nombre.trim() === "") {
+            alert("Por favor, ingresa un nombre.");
+            return;
+        }
+    
+        console.log("Nombre ingresado:", nombre);
+        alert(`Hola: ${nombre}!!`);
+        setNombre("");
     }
 
     return (
         <form onSubmit={manejarSubmit} className="formulario">
             <h2>Formulario</h2>
             <input
+                className='input-nombre'
                 type="text"
                 placeholder="Ingrese su nombre"
                 value={nombre}
