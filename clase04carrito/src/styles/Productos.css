@@ -1,0 +1,38 @@
+.productos-conteiner{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.producto-card{
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: black;
+}
+
+.producto-card h3 {
+    min-height: 3.5rem; /* Altura mínima para 2 líneas aprox */
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Opcional: centra horizontalmente si querés */
+    text-align: center; /* Para centrar el texto si es largo */
+    margin-bottom: 8px;
+}
+/* 
+.tarjeta-proyecto button{
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+ */
+.tarjeta-proyecto button:hover{
+    /* background-color: #0056b3; */
+    background-color: #007bff;
+    color: white;
+    border: none;
+}

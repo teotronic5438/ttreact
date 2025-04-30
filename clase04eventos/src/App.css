@@ -5,6 +5,11 @@
   text-align: center;
 }
 
+h1{
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
 .input-nombre{
   margin-left: 1em;
   margin-right: 1em;
@@ -16,9 +21,7 @@
   }
 }
 
-.card {
-  padding: 2em;
-}
+
 
 .read-the-docs {
   color: #888;
