@@ -11,9 +11,12 @@ function ProductosContainer({productos}){
           const index = prevCarrito.findIndex(item => item.nombre === producto.nombre);
       
           if (index !== -1) {
-            // Ya está en el carrito, actualizamos cantidad
+            // Ya está en el carrito, actualizamos cantidad de forma inmutable
             const nuevoCarrito = [...prevCarrito];
-            nuevoCarrito[index].cantidad += 1;
+            nuevoCarrito[index] = {
+                ...nuevoCarrito[index],
+                cantidad: nuevoCarrito[index].cantidad + 1
+            };
             return nuevoCarrito;
           } else {
             // No está, lo agregamos con cantidad 1
