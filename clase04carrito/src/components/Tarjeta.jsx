@@ -1,6 +1,6 @@
 import Boton from "./Boton";
 
-function Tarjeta({producto}){
+function Tarjeta({producto, agregarAlCarrito}){
     const {nombre, descripcion, precio, imagen} = producto;
     return(
         <div className="producto-card">
@@ -8,7 +8,7 @@ function Tarjeta({producto}){
             <p>{descripcion}</p>
             <p>Precio: $ {precio} ARS</p>
             <img src={imagen} className="imagen-card" alt="Imagen avatar del usuario" />
-            <Boton />
+            <Boton onClick={() => agregarAlCarrito(producto)} />
         </div>
     )
 }

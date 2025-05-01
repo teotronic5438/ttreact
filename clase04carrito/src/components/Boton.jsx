@@ -1,11 +1,9 @@
 import "../styles/BotonTemas.css";
 
-export default function Boton() {
-    function handleClick() {
-        alert(`articulo agregado al carrito`);
-    }
+export default function Boton({onClick}) {
+
     return (
-        <button className="boton-proyecto" onClick={handleClick}>
+        <button className="boton-proyecto" onClick={onClick}>
             Agregar al carrito
         </button>
     ); 
