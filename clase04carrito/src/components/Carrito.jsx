@@ -19,14 +19,14 @@ export default function Carrito({productos}){
                     </thead>
     
                     <tbody>
-                    {productos.map(producto => (
-                        <tr key={producto.nombre}>
-                            <td>{producto.nombre}</td>
-                            <td>{producto.descripcion}</td>
-                            <td>${producto.precio}</td>
-                            <td>{producto.cantidad}</td>
-                        </tr>
-                ))}
+                        {productos.map(producto => (
+                            <tr key={producto.nombre}>
+                                <td>{producto.nombre}</td>
+                                <td>{producto.descripcion}</td>
+                                <td>${producto.precio}</td>
+                                <td>{producto.cantidad}</td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>)
             }
