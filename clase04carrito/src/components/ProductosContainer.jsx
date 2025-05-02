@@ -5,24 +5,22 @@ import Carrito from "./Carrito";
 
 function ProductosContainer({productos}){
     const [productosCarrito, setProductosCarrito] = useState([]);
+    const [cargando, setCargando] = useState(true);
+    const [error, setError] = useState(null);
 
-    // useState es un hook que nos permite manejar el estado de un componente
-    // useEffect es un hook que nos permite ejecutar efectos secundarios en un componente
-    // useEffect se ejecuta después de que el componente se ha montado o actualizado
-    // useEffect se puede usar para hacer peticiones a una API, suscribirse a eventos, etc.
-    // useEffect recibe dos parámetros: una función y un array de dependencias
-    // Si el array de dependencias está vacío, la función se ejecuta una sola vez al montar el componente
-    // Si el array de dependencias tiene valores, la función se ejecuta cada vez que esos valores cambian
-    // Si no se pasa el array de dependencias, la función se ejecuta cada vez que el componente se actualiza
     useEffect(() => {
-      fetch("https://680f75cd67c5abddd195693e.mockapi.io/products")
+      fetch("https://68150b27225ff1af162af909.mockapi.io/productos")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
         // setProductosCarrito(data);
+        setCargando(false);  // esto servira para desactivar el spinner
+        setError(null);     // esto servira para desactivar el spinner
       })
       .catch((error) => {
         console.error("Error al obtener los productos:", error);
+        setCargando(false);
+        setError("Error al obtener los productos");
       });
     }, []);
 
@@ -35,6 +33,16 @@ function ProductosContainer({productos}){
       };
       
     }, []);
+
+    // useState es un hook que nos permite manejar el estado de un componente
+    // useEffect es un hook que nos permite ejecutar efectos secundarios en un componente
+    // useEffect se ejecuta después de que el componente se ha montado o actualizado
+    // useEffect se puede usar para hacer peticiones a una API, suscribirse a eventos, etc.
+    // useEffect recibe dos parámetros: una función y un array de dependencias
+    // Si el array de dependencias está vacío, la función se ejecuta una sola vez al montar el componente
+    // Si el array de dependencias tiene valores, la función se ejecuta cada vez que esos valores cambian
+    // Si no se pasa el array de dependencias, la función se ejecuta cada vez que el componente se actualiza
+
     */}
 
     function agregarAlCarrito(producto) {
@@ -55,19 +63,25 @@ function ProductosContainer({productos}){
           }
         });
       }
-      
-    return(
-        <div>
-            <div className="productos-conteiner">
-                {productos.map(producto => (
-                    <Tarjeta key={producto.nombre}  producto={producto} agregarAlCarrito={agregarAlCarrito}/>
-                ))}
-            </div>
-            <Carrito productos={productosCarrito}/>
-        </div>
+    
+    if (cargando) {
+        return <div className="spinner">Cargando Productos...</div>;
+    } else if (error) {
+        return <div className="error">Error: {error}</div>;
+    } else {
+      return(
+          <div>
+              <div className="productos-conteiner">
+                  {productos.map(producto => (
+                      <Tarjeta key={producto.nombre}  producto={producto} agregarAlCarrito={agregarAlCarrito}/>
+                  ))}
+              </div>
+              <Carrito productos={productosCarrito}/>
+          </div>
+      )
+    }
+    
 
-
-    )
 }
 
 export default ProductosContainer;
