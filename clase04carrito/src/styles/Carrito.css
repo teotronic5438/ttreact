@@ -46,3 +46,8 @@
         padding: 6px;
     }
 }
+
+.total-row {
+    border-top: 2px solid #000;
+    background-color: #f8f8f8;
+  }
