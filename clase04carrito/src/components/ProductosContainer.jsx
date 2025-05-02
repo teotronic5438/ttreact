@@ -3,10 +3,11 @@ import Tarjeta from "./Tarjeta";
 import "../styles/Productos.css";
 import Carrito from "./Carrito";
 
-function ProductosContainer({productos}){
+function ProductosContainer(){
     const [productosCarrito, setProductosCarrito] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
+    const [productos, setProductos] = useState([]);
 
     useEffect(() => {
       fetch("https://68150b27225ff1af162af909.mockapi.io/productos")
@@ -14,8 +15,10 @@ function ProductosContainer({productos}){
       .then((data) => {
         console.log(data);
         // setProductosCarrito(data);
+        setProductos(data); // Guardamos los productos en el estado
         setCargando(false);  // esto servira para desactivar el spinner
         setError(null);     // esto servira para desactivar el spinner
+
       })
       .catch((error) => {
         console.error("Error al obtener los productos:", error);
@@ -65,7 +68,12 @@ function ProductosContainer({productos}){
       }
     
     if (cargando) {
-        return <div className="spinner">Cargando Productos...</div>;
+      return (
+        <div className="spinner">
+          <div className="loader"></div>
+          Cargando Productos...
+        </div>
+      );      
     } else if (error) {
         return <div className="error">Error: {error}</div>;
     } else {
