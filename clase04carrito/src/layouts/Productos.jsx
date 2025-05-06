@@ -6,7 +6,6 @@ import Footer from "../components/Footer"
 function Productos() {
     return(
         <div>
-            <Nav />
             <Header />
                 <p>Hola estoy en productos</p>
             <Footer />

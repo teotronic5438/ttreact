@@ -6,7 +6,6 @@ import Footer from "../components/Footer"
 function Home() {
     return(
         <div>
-            <Nav />
             <Header />
             <Main />
             <Footer />
