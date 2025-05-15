@@ -1,35 +1,59 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
+import Header from './components/Header';
+import Nav from './components/Nav';
+import Footer from './components/Footer';
+import Home from './pages/Home';
+import Productos from './pages/Productos';
+import Carrito from './pages/Carrito';
+import Nosotros from './pages/Nosotros';
+import Contacto from './pages/Contacto';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [showHeader, setShowHeader] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY) {
+        // bajando
+        setShowHeader(false);
+      } else {
+        // subiendo
+        setShowHeader(true);
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [lastScrollY]);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="app-container">
+      <Router>
+        <div className={`header-nav-wrapper ${!showHeader ? 'header-hidden' : ''}`}>
+          <Header />
+          <Nav />
+        </div>
+
+        <div className="main-content">
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/productos' element={<Productos />} />
+            <Route path='/carrito' element={<Carrito />} />
+            <Route path='/nosotros' element={<Nosotros />} />
+            <Route path='/contacto' element={<Contacto />} />
+          </Routes>
+        </div>
+
+        <Footer />
+      </Router>
+    </div>
+  );
 }
 
-export default App
+export default App;
+
