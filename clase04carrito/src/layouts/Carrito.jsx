@@ -6,7 +6,6 @@ import Footer from "../components/Footer"
 function Carrito() {
     return(
         <div>
-            <Nav />
             <Header />
             <p>Hola estoy en carrito</p>
             <Footer />
