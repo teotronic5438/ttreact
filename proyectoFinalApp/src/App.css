@@ -1,17 +1,6 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
   text-align: center;
-}
-
-
-/*********************
-      Header
-**********************/
-header{
-  background-color: #4CAF50;
-  padding: 10px;
-  text-align: center;
-  color: white;
+  background-color: #242424;
 }
