@@ -103,3 +103,16 @@ footer {
   gap: 10px;
   padding: 10px;
 }
+
+.temas-conteiner{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1em;
+}
+
+.temas-conteiner button{
+  min-width: 100px;
+  padding: 0.3em;
+  border-radius: 10px;
+}
