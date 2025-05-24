@@ -1,11 +1,35 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
 import "../styles/ProductosContainer.css";
 import Card from "./Card";
 import Carrito from "./Carrito";
+import Spinner from "./Spinner";
 
-function ProductosContainer({ productos }) {
+function ProductosContainer() {
     const [productosCarrito, setProductosCarrito] = useState([]);
+    const [cargando, setCargando] = useState(true);
+    const [error, setError] = useState(null);
+    const [productos, setProductos] = useState([]);
+
+    useEffect(() => {
+      fetch("https://68150b27225ff1af162af909.mockapi.io/productos")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        // setProductosCarrito(data);
+        setProductos(data); // Guardamos los productos en el estado
+        setCargando(false);  // esto servira para desactivar el spinner
+        setError(null);     // esto servira para desactivar el spinner
+
+      })
+      .catch((error) => {
+        console.error("Error al obtener los productos:", error);
+        setCargando(false);
+        setError("Error al obtener los productos");
+      });
+    }, []);
+
+
 
     function agregarAlCarrito(producto) {
         // Busco dentro del arreglo productosCarrito si ya existe un producto con el mismo id.
@@ -13,6 +37,8 @@ function ProductosContainer({ productos }) {
         const productoExistente = productosCarrito.find((p) => p.id === producto.id);
 
         if (productoExistente) {
+            // Si el producto ya existe en el carrito, actualizamos su cantidad
+            // y el estado del carrito.
             setProductosCarrito(
                 productosCarrito.map((p) =>
                     p.id === producto.id
@@ -21,24 +47,41 @@ function ProductosContainer({ productos }) {
                 )
             );
         } else {
+            // Si el producto no existe en el carrito, lo agregamos con cantidad 1
+            // y el estado del carrito.
             setProductosCarrito([...productosCarrito, { ...producto, cantidad: 1 }]);
         }
     }
 
-    return (
-        <>
-            <div className="productosContainer">
-                {productos.length === 0 ? (
-                    <h3>El carrito está vacío</h3>
-                ) : (
-                    productos.map((producto) => (
-                        <Card key={producto.id} producto={producto} funcionCarrito={agregarAlCarrito}/>
-                    ))
-                )}
-            </div>
-            <Carrito productos={productosCarrito} />
-        </>
-    );
+
+    // agregarmos logica para renderizado por spinner, error o productos
+    if (cargando) {
+
+      return (<Spinner />);
+
+    } else if (error) {
+
+        // Si hay un error, renderizamos el mensaje de error
+        return <div className="error">Error: {error}</div>;
+
+    } else {
+        
+        // Si no hay error y no está cargando, renderizamos los productos
+        return (
+            <>
+                <div className="productosContainer">
+                    {productos.length === 0 ? (
+                        <h3>El carrito está vacío</h3>
+                    ) : (
+                        productos.map((producto) => (
+                            <Card key={producto.id} producto={producto} funcionCarrito={agregarAlCarrito}/>
+                        ))
+                    )}
+                </div>
+                <Carrito productos={productosCarrito} />
+            </>
+        );
+    }
 }
 
 export default ProductosContainer;

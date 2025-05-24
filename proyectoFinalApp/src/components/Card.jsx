@@ -8,11 +8,11 @@ function Card({producto, funcionCarrito}){
     return(
         <div className="tarjetaIndividual">
             <div>
-                <h1>{producto.nombre}</h1>
-                <p>{producto.descripcion}</p>
+                <h3>{producto.nombre}</h3>
+                <p className="descripcion">{producto.descripcion}</p>
             </div>
             <div>
-                <img src={producto.imagen} alt = "Foto de la persona" />
+                <img className="imagen-card" src={producto.imagen} alt = "Foto de la persona" />
             </div>
             <p>$ {producto.precio} ARS</p>
             <button className="btnAgregarCarrito" onClick={agregarAlCarrito}>Agregar al carrito</button>
