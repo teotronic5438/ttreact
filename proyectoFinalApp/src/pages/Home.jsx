@@ -1,3 +1,4 @@
+import Carrito from "../components/Carrito";
 import Main from "../components/Main";
 import ProductosContainer from "../components/ProductosContainer";
 
