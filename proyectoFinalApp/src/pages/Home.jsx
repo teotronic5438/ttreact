@@ -1,28 +1,49 @@
-import EquipoTalentoLab from "../components/EquipoTalentoLab";
-import GaleriaIntereses from "../components/GaleriaIntereses";
 import Main from "../components/Main";
-import TarjetaProyecto from "../components/TarjetaProyecto";
+import ProductosContainer from "../components/ProductosContainer";
 
 function Home(){
-    const equipo = [
-        { nombre: 'Silvia', rol: 'Product Owner', imagen: 'https://placehold.co/200x100' },
-        { nombre: 'Luis', rol: 'Diseñador UX/UI', imagen: 'https://placehold.co/200x100' },
-        { nombre: 'Matías', rol: 'Desarrollador', imagen: 'https://placehold.co/200x100' },
-        { nombre: 'Sabrina', rol: 'Desarrolladora', imagen: 'https://placehold.co/200x100' },
+    const productos = [
+        {
+            id: 1,
+            nombre: "Producto A",
+            descripcion: "Descripción del Producto A",
+            precio: 100.00,
+            imagen: "https://placehold.co/150x200"
+        },
+        {
+            id: 2,
+            nombre: "Producto B",
+            descripcion: "Descripción del Producto B",
+            precio: 150.50,
+            imagen: "https://placehold.co/150x200"
+        },
+        {
+            id: 3,
+            nombre: "Producto C",
+            descripcion: "Descripción del Producto C",
+            precio: 75.25,
+            imagen: "https://placehold.co/150x200"
+        },
+        {
+            id: 4,
+            nombre: "Producto D",
+            descripcion: "Descripción del Producto D",
+            precio: 200.00,
+            imagen: "https://placehold.co/150x200"
+        },
+        {
+            id: 5,
+            nombre: "Producto E",
+            descripcion: "Descripción del Producto E",
+            precio: 50.00,
+            imagen: "https://placehold.co/150x200"
+        }
     ];
-
-    const intereses = ['React', 'JavaScript', 'APIs', 'Diseño UX', 'Node.js'];
 
     return(
         <>
             <Main />
-            <EquipoTalentoLab equipo={equipo} />
-            <TarjetaProyecto
-                titulo="Plataforma de Gestión"
-                descripcion="Una herramienta para optimizar la gestión de equipos."
-                botonTexto="Explorar proyecto"
-            />
-            <GaleriaIntereses temas={intereses}/>
+            <ProductosContainer productos={productos} />
         </>
     )
 }
