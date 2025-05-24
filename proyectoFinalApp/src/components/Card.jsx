@@ -1,6 +1,10 @@
-function Card({producto}){
+function Card({producto, funcionCarrito}){
     // console.log(persona);
     
+    function agregarAlCarrito() {
+        funcionCarrito(producto);
+    }
+
     return(
         <div className="tarjetaIndividual">
             <div>
@@ -11,7 +15,7 @@ function Card({producto}){
                 <img src={producto.imagen} alt = "Foto de la persona" />
             </div>
             <p>$ {producto.precio} ARS</p>
-            <button className="btnAgregarCarrito">Agregar al carrito</button>
+            <button className="btnAgregarCarrito" onClick={agregarAlCarrito}>Agregar al carrito</button>
         </div>
     )
 }

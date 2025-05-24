@@ -1,0 +1,58 @@
+.productosCarritoContainer{
+    margin-top: 20px;
+}
+
+
+.carrito-conteiner {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 32px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    color: #333;
+    max-width: 100%;
+    overflow-x: auto; /* por si la tabla se pasa en móviles */
+}
+
+.carrito-conteiner h2 {
+    margin-bottom: 16px;
+    text-align: center;
+    color: #007bff;
+}
+
+.carrito-tabla {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+}
+
+.carrito-tabla th,
+.carrito-tabla td {
+    text-align: center;
+    padding: 12px;
+    border-bottom: 1px solid #ccc;
+}
+
+.carrito-tabla th {
+    background-color: #f0f0f0;
+    color: #444;
+    font-weight: 600;
+}
+
+.carrito-tabla tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+@media (max-width: 600px) {
+    .carrito-tabla,
+    .carrito-tabla th,
+    .carrito-tabla td {
+        font-size: 0.8rem;
+        padding: 6px;
+    }
+}
+
+.total-row {
+    border-top: 2px solid #000;
+    background-color: #f8f8f8;
+  }
