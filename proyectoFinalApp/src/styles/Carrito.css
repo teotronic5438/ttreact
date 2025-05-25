@@ -55,4 +55,10 @@
 .total-row {
     border-top: 2px solid #000;
     background-color: #f8f8f8;
-  }
+}
+
+.icono-delete{
+    cursor: pointer;
+    color: #ff0000;
+    font-size: 1.2rem;
+}

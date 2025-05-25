@@ -1,7 +1,7 @@
 import "../styles/Carrito.css"
 
 
-export default function Carrito({productos}){
+export default function Carrito({productos, eliminarProducto }){
 
     // Calculo el total con reduce
     const total = productos.reduce((acc, prod) => {
@@ -23,6 +23,7 @@ export default function Carrito({productos}){
                             <th>Precio</th>
                             <th>Cantidad</th>
                             <th>SubTotal</th>
+                            <th>Acciones</th>
                         </tr>
                     </thead>
     
@@ -34,6 +35,7 @@ export default function Carrito({productos}){
                                 <td>$ {producto.precio}</td>
                                 <td>{producto.cantidad}</td>
                                 <td>$ {(producto.precio*producto.cantidad).toFixed(2)}</td>
+                                <td><i onClick={() => eliminarProducto(producto)}  class="fa-solid fa-trash icono-delete"></i></td>
                             </tr>
                         ))}
                         <tr className="total-row">

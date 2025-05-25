@@ -53,6 +53,12 @@ function ProductosContainer() {
         }
     }
 
+    // Función para eliminar un producto del carrito
+    function eliminarDelCarrito(productoAEliminar) {
+        setProductosCarrito(productosCarrito.filter((p) => p.id !== productoAEliminar.id));
+    }
+
+
 
     // agregarmos logica para renderizado por spinner, error o productos
     if (cargando) {
@@ -65,7 +71,7 @@ function ProductosContainer() {
         return <div className="error">Error: {error}</div>;
 
     } else {
-        
+
         // Si no hay error y no está cargando, renderizamos los productos
         return (
             <>
@@ -78,7 +84,7 @@ function ProductosContainer() {
                         ))
                     )}
                 </div>
-                <Carrito productos={productosCarrito} />
+                <Carrito productos={productosCarrito} eliminarProducto={eliminarDelCarrito} />
             </>
         );
     }
