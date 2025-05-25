@@ -62,3 +62,54 @@
     color: #ff0000;
     font-size: 1.2rem;
 }
+
+
+/****************/
+.control-cantidad {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+/* Oculta las flechitas del input tipo number en Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Oculta flechas en Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+/* Estilo base para el control de cantidad */
+.control-cantidad {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+.control-cantidad input {
+    width: 40px;
+    text-align: center;
+    padding: 3px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.control-cantidad button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.control-cantidad button:hover {
+    background-color: #0056b3;
+}

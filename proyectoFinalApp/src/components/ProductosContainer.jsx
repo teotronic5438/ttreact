@@ -31,27 +31,25 @@ function ProductosContainer() {
 
 
 
-    function agregarAlCarrito(producto) {
-        // Busco dentro del arreglo productosCarrito si ya existe un producto con el mismo id.
-        // Si no existe aún en el carrito, productoExistente será undefined.
+    function agregarAlCarrito(producto, cantidad) {
         const productoExistente = productosCarrito.find((p) => p.id === producto.id);
 
         if (productoExistente) {
-            // Si el producto ya existe en el carrito, actualizamos su cantidad
-            // y el estado del carrito.
             setProductosCarrito(
                 productosCarrito.map((p) =>
                     p.id === producto.id
-                        ? { ...productoExistente, cantidad: productoExistente.cantidad + 1 }
+                        ? { ...productoExistente, cantidad: productoExistente.cantidad + cantidad }
                         : p
                 )
             );
         } else {
-            // Si el producto no existe en el carrito, lo agregamos con cantidad 1
-            // y el estado del carrito.
-            setProductosCarrito([...productosCarrito, { ...producto, cantidad: 1 }]);
+            setProductosCarrito([
+                ...productosCarrito, 
+                { ...producto, cantidad }
+            ]);
         }
     }
+
 
     // Función para eliminar un producto del carrito
     function eliminarDelCarrito(productoAEliminar) {
