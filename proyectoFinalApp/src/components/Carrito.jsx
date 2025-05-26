@@ -43,6 +43,7 @@ export default function Carrito({productos, eliminarProducto }){
                                 Total:
                             </td>
                             <td style={{ fontWeight: "bold" }}>${total.toFixed(2)}</td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>)

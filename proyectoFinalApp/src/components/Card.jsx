@@ -4,11 +4,12 @@ function Card({ producto, funcionCarrito }) {
     const [cantidad, setCantidad] = useState(1);
 
     const aumentarCantidad = () => setCantidad((prev) => prev + 1);
+
     const disminuirCantidad = () => {
         if (cantidad > 1) setCantidad((prev) => prev - 1);
     };
 
-    const handleCantidadChange = (e) => {
+    const actualizarCantidad = (e) => {
         const value = parseInt(e.target.value);
         if (!isNaN(value) && value >= 1) {
             setCantidad(value);
@@ -36,7 +37,7 @@ function Card({ producto, funcionCarrito }) {
                 <input 
                     type="number" 
                     value={cantidad} 
-                    onChange={handleCantidadChange} 
+                    onChange={actualizarCantidad} 
                     min="1" 
                     style={{ width: "40px", textAlign: "center" }}
                 />

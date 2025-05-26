@@ -32,9 +32,12 @@ function ProductosContainer() {
 
 
     function agregarAlCarrito(producto, cantidad) {
+        // primero busco si el producto ya existe en el carrito
         const productoExistente = productosCarrito.find((p) => p.id === producto.id);
 
         if (productoExistente) {
+            // Si el producto ya existe, actualizamos su cantidad
+            // usamos el spread operator para no mutar el estado
             setProductosCarrito(
                 productosCarrito.map((p) =>
                     p.id === producto.id
@@ -43,6 +46,8 @@ function ProductosContainer() {
                 )
             );
         } else {
+            // Si el producto no existe, lo agregamos al carrito
+            // usamos el spread operator para no mutar el estado
             setProductosCarrito([
                 ...productosCarrito, 
                 { ...producto, cantidad }
