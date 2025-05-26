@@ -1,8 +1,8 @@
 import ProductosContainer from "../components/ProductosContainer";
 
-function Productos(){
+function Productos({agregarAlCarrito}){
     return(
-        <ProductosContainer />
+        <ProductosContainer agregarAlCarrito={agregarAlCarrito} />
     )
 }
 
