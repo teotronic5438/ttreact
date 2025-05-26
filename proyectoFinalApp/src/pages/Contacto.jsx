@@ -1,5 +1,5 @@
 function Contacto(){
-    return(<>Contacto</>)
+    return(<>Contacto en creacion</>)
 }
 
 export default Contacto;

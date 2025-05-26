@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { dispararSweetBasico } from "../assets/SweetAlert";
 
 function Card({ producto, funcionCarrito }) {
     const [cantidad, setCantidad] = useState(1);
@@ -18,6 +19,12 @@ function Card({ producto, funcionCarrito }) {
     };
 
     function agregarAlCarrito() {
+        dispararSweetBasico(
+            "Producto agregado",
+            `Has agregado ${producto.nombre} al carrito`,
+            "success",
+            "Aceptar"
+        );
         funcionCarrito(producto, cantidad);  // ahora pasamos también la cantidad
     }
 

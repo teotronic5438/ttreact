@@ -7,6 +7,8 @@ import Home from './pages/Home';
 import Productos from './pages/Productos';
 import CarritoPage from './pages/CarritoPage';
 import { useState } from 'react';
+import Contacto from './pages/Contacto';
+import About from './pages/About';
 
 function App() {
   const [productosCarrito, setProductosCarrito] = useState([]);
@@ -44,12 +46,14 @@ function App() {
     <div className="app-container">
       <Router>
           <Header />
-          <Nav />
+          <Nav productosCarrito={productosCarrito} />
           <div className="main-content">
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/productos' element={<Productos agregarAlCarrito={agregarAlCarrito} />} />
               <Route path='/carrito' element={<CarritoPage productosCarrito={productosCarrito} eliminarDelCarrito={eliminarDelCarrito} />} />
+              <Route path='/contacto' element={<Contacto />} />
+              <Route path='/about' element={<About />} />
             </Routes>
           </div>
 
