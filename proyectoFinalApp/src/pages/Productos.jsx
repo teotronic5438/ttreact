@@ -1,5 +1,9 @@
+import ProductosContainer from "../components/ProductosContainer";
+
 function Productos(){
-    return(<>Productos</>)
+    return(
+        <ProductosContainer />
+    )
 }
 
 export default Productos;
