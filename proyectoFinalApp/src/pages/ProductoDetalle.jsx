@@ -64,7 +64,7 @@ const actualizarCantidad = (e) => {
           </div>
 
           <button onClick={handleAgregar} className="btn-agregar">
-            Agregar al carrito
+              Agregar al carrito
           </button>
       </div>
     </div>
