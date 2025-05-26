@@ -1,58 +1,24 @@
-import { useState } from "react";
-import { dispararSweetBasico } from "../assets/SweetAlert";
+import { useNavigate } from "react-router-dom";
 
-function Card({ producto, funcionCarrito }) {
-    const [cantidad, setCantidad] = useState(1);
+function Card({ producto }) {
+    const navigate = useNavigate();
 
-    const aumentarCantidad = () => setCantidad((prev) => prev + 1);
-
-    const disminuirCantidad = () => {
-        if (cantidad > 1) setCantidad((prev) => prev - 1);
+    const irAlDetalle = () => {
+        navigate(`/productos/${producto.id}`);
     };
-
-    const actualizarCantidad = (e) => {
-        const value = parseInt(e.target.value);
-        if (!isNaN(value) && value >= 1) {
-            setCantidad(value);
-            setCantidad(1);
-        }
-    };
-
-    function agregarAlCarrito() {
-        dispararSweetBasico(
-            "Producto agregado",
-            `Has agregado ${producto.nombre} al carrito`,
-            "success",
-            "Aceptar"
-        );
-        funcionCarrito(producto, cantidad);  // ahora pasamos también la cantidad
-    }
 
     return (
         <div className="tarjetaIndividual">
             <div>
                 <h3>{producto.nombre}</h3>
-                <p className="descripcion">{producto.descripcion}</p>
             </div>
             <div>
-                <img className="imagen-card" src={producto.imagen} alt="Foto de la persona" />
+                <img className="imagen-card" src={producto.imagen} alt={producto.nombre} />
             </div>
             <p>$ {producto.precio} ARS</p>
 
-            <div className="control-cantidad">
-                <button onClick={disminuirCantidad}>−</button>
-                <input 
-                    type="number" 
-                    value={cantidad} 
-                    onChange={actualizarCantidad} 
-                    min="1" 
-                    style={{ width: "40px", textAlign: "center" }}
-                />
-                <button onClick={aumentarCantidad}>+</button>
-            </div>
-
-            <button className="btnAgregarCarrito" onClick={agregarAlCarrito}>
-                Agregar al carrito
+            <button className="btnAgregarCarrito" onClick={irAlDetalle}>
+                Ver producto
             </button>
         </div>
     );

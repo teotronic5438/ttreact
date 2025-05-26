@@ -52,7 +52,7 @@ function App() {
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/productos' element={<Productos agregarAlCarrito={agregarAlCarrito} />} />
-              <Route path="/productos/:id" element={<ProductoDetalle />} />
+              <Route path="/productos/:id" element={<ProductoDetalle agregarAlCarrito={agregarAlCarrito} />} />
               <Route path='/carrito' element={<CarritoPage productosCarrito={productosCarrito} eliminarDelCarrito={eliminarDelCarrito} />} />
               <Route path='/contacto' element={<Contacto />} />
               <Route path='/about' element={<About />} />
