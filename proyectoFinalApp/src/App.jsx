@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
@@ -6,7 +7,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import Productos from './pages/Productos';
 import CarritoPage from './pages/CarritoPage';
-import { useState } from 'react';
+import ProductoDetalle from './pages/ProductoDetalle';
 import Contacto from './pages/Contacto';
 import About from './pages/About';
 
@@ -51,9 +52,11 @@ function App() {
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/productos' element={<Productos agregarAlCarrito={agregarAlCarrito} />} />
+              <Route path="/productos/:id" element={<ProductoDetalle />} />
               <Route path='/carrito' element={<CarritoPage productosCarrito={productosCarrito} eliminarDelCarrito={eliminarDelCarrito} />} />
               <Route path='/contacto' element={<Contacto />} />
               <Route path='/about' element={<About />} />
+              
             </Routes>
           </div>
 

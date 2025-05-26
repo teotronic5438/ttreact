@@ -11,7 +11,7 @@ function CarritoPage({productosCarrito, eliminarDelCarrito}) {
             "Sí, eliminar",
             true
         ).then((result) => {
-            console.log(result);
+            // console.log(result);
             
             if (result.isConfirmed) {
                 eliminarDelCarrito(productoAEliminar);
