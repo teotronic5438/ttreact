@@ -25,7 +25,7 @@ const tecnologias = [
   },
   {
     nombre: 'react-router-dom',
-    imagen: '../../public/img/rr_logo_light.svg',
+    imagen: '/img/rr_logo_light.svg',
     descripcion: 'Librería para manejar rutas en aplicaciones React.'
   },
   {
