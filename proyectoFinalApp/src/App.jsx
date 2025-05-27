@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import Nav from './components/Nav';
@@ -10,9 +10,15 @@ import CarritoPage from './pages/CarritoPage';
 import ProductoDetalle from './pages/ProductoDetalle';
 import Contacto from './pages/Contacto';
 import About from './pages/About';
+import Login from './pages/Login';
+import RutaAdminProtegida from './components/RutaAdminProtegida';
+import RutaProtegidaCarrito from './components/RutaProtegidaCarrito'; // ajustá la ruta
+
 
 function App() {
   const [productosCarrito, setProductosCarrito] = useState([]);
+  const [usuarioLogeado, setUsuarioLogeado] = useState(false);
+  const [adminLogeado, setAdminLogeado] = useState(false);
   
   function agregarAlCarrito(producto, cantidad) {
       // primero busco si el producto ya existe en el carrito
@@ -42,6 +48,13 @@ function App() {
     setProductosCarrito(productosCarrito.filter((p) => p.id !== productoAEliminar.id));
   }
 
+  function manejarAdmin() {
+    setAdminLogeado(!adminLogeado);
+  }
+
+  function manejarUsuarioLogeado() {
+    setUsuarioLogeado(!usuarioLogeado);
+  }
 
   return (
     <div className="app-container">
@@ -53,10 +66,22 @@ function App() {
               <Route path='/' element={<Home />} />
               <Route path='/productos' element={<Productos agregarAlCarrito={agregarAlCarrito} />} />
               <Route path="/productos/:id" element={<ProductoDetalle agregarAlCarrito={agregarAlCarrito} />} />
-              <Route path='/carrito' element={<CarritoPage productosCarrito={productosCarrito} eliminarDelCarrito={eliminarDelCarrito} />} />
+              <Route
+                path='/carrito'
+                element={
+                  <RutaProtegidaCarrito
+                    usuarioLogeado={usuarioLogeado}
+                    adminLogeado={adminLogeado}
+                    productosCarrito={productosCarrito}
+                    eliminarDelCarrito={eliminarDelCarrito}
+                  />
+                }
+              />
               <Route path='/contacto' element={<Contacto />} />
               <Route path='/about' element={<About />} />
-              
+              <Route path='/login' element={<Login user={usuarioLogeado} admin={adminLogeado} setLogeadoAdmin={manejarAdmin} setUsuarioLogeado={manejarUsuarioLogeado}/>} />
+              <Route path='/admin' element={<RutaAdminProtegida adminLogeado={adminLogeado} />} />
+              <Route path='*' element={<h1>404 - Página no encontrada</h1>} />
             </Routes>
           </div>
 

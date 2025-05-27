@@ -12,6 +12,8 @@ function Nav({productosCarrito}) {
                 <li><Link to="/carrito" style={{ color: "white", textDecoration: "none" }}>
                     Carrito<sup>{productosCarrito.length >0 ? productosCarrito.length : ""}</sup>
                 </Link></li>
+                <li><Link to="/admin" style={{ color: "white", textDecoration: "none" }}>Admin</Link></li>
+                <li><Link to="/login" style={{ color: "white", textDecoration: "none" }}>Login</Link></li>
             </ul>  
         </nav>  
     );  
