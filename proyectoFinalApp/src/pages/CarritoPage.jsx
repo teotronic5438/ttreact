@@ -1,7 +1,7 @@
 import { dispararSweetBasico } from "../assets/SweetAlert";
 import Carrito from "../components/Carrito";
 
-function CarritoPage({productosCarrito, eliminarDelCarrito}) {
+function CarritoPage({productosCarrito, eliminarDelCarrito, vaciarCarrito}) {
 
     function eliminarDelCarritoPages(productoAEliminar) {
         dispararSweetBasico(
@@ -23,7 +23,7 @@ function CarritoPage({productosCarrito, eliminarDelCarrito}) {
 
     
     return(
-        <Carrito productos={productosCarrito} eliminarDelCarritoPages={eliminarDelCarritoPages} />
+        <Carrito productos={productosCarrito} eliminarDelCarritoPages={eliminarDelCarritoPages} vaciarCarrito={vaciarCarrito}/>
     )
 }
 

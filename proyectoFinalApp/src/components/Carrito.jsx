@@ -1,12 +1,20 @@
 import "../styles/Carrito.css"
+import { dispararSweetBasico } from "../assets/SweetAlert";
 
-
-export default function Carrito({productos, eliminarDelCarritoPages }){
+export default function Carrito({productos, eliminarDelCarritoPages, vaciarCarrito}){
 
     // Calculo el total con reduce
     const total = productos.reduce((acc, prod) => {
         return acc + (prod.precio * prod.cantidad);
     }, 0);
+
+    
+    const finalizarCompra = () => {
+        // Vaciar el carrito
+        vaciarCarrito(); 
+        // Mostrar mensaje de éxito
+        dispararSweetBasico('¡Compra finalizada con éxito!', 'Gracias por tu compra.', 'success', 'Cerrar');
+    };
 
     return(
         <div className="productosCarritoContainer">
@@ -49,6 +57,14 @@ export default function Carrito({productos, eliminarDelCarritoPages }){
                 </table>)
             }
             
+            {/* Botón de Finalizar Compra */}
+            {productos.length > 0 && (
+                <div style={{ marginTop: "20px", textAlign: "right" }}>
+                    <button className="boton-finalizar-compra" onClick={finalizarCompra}>
+                        Finalizar Compra
+                    </button>
+                </div>
+            )}
   
         </div>
     )

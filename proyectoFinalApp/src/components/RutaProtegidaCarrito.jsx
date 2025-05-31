@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import CarritoPage from "../pages/CarritoPage";
 
-function RutaProtegidaCarrito({ usuarioLogeado, adminLogeado, productosCarrito, eliminarDelCarrito }) {
+function RutaProtegidaCarrito({ usuarioLogeado, adminLogeado, productosCarrito, eliminarDelCarrito, vaciarCarrito }) {
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function RutaProtegidaCarrito({ usuarioLogeado, adminLogeado, productosCarrito, 
   }, [usuarioLogeado, adminLogeado, navigate]);
 
   return (usuarioLogeado || adminLogeado)
-    ? <CarritoPage productosCarrito={productosCarrito} eliminarDelCarrito={eliminarDelCarrito} />
+    ? <CarritoPage productosCarrito={productosCarrito} eliminarDelCarrito={eliminarDelCarrito} vaciarCarrito={vaciarCarrito} />
     : null;
 }
 

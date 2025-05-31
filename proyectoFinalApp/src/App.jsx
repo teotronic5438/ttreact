@@ -48,6 +48,10 @@ function App() {
     setProductosCarrito(productosCarrito.filter((p) => p.id !== productoAEliminar.id));
   }
 
+  function vaciarCarrito(){
+    setProductosCarrito([]);
+  }
+
   function manejarAdmin() {
     setAdminLogeado(!adminLogeado);
   }
@@ -74,6 +78,7 @@ function App() {
                     adminLogeado={adminLogeado}
                     productosCarrito={productosCarrito}
                     eliminarDelCarrito={eliminarDelCarrito}
+                    vaciarCarrito={vaciarCarrito}
                   />
                 }
               />
