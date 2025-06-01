@@ -40,8 +40,8 @@ const actualizarCantidad = (e) => {
       .then((res) => res.json())
       .then((data) => {
         setProducto(data)
-        setCargando(false);  // esto servira para desactivar el spinner
-        setError(null);     // esto servira para desactivar el spinner
+        setCargando(false);
+        setError(null);    
       })
       .catch((error) => {
         console.error("Error al obtener los productos:", error);

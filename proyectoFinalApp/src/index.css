@@ -123,3 +123,69 @@ footer {
   padding: 0.3em;
   border-radius: 10px;
 }
+
+
+/*********************
+      Login Form
+**********************/
+
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 2em;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 1em;
+  color: darkgreen;
+  font-size: 1.5em;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.4em;
+  font-weight: bold;
+  color: #333;
+}
+
+.form-group input {
+  padding: 0.6em;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: darkgreen;
+}
+
+button[type="submit"] {
+  padding: 0.8em;
+  background-color: darkgreen;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #006400;
+}

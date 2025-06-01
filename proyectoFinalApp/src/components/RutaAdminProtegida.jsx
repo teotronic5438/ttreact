@@ -2,8 +2,12 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Admin from "../pages/Admin"; // ajustá el path si es necesario
+import { useAuthContext } from "../contexts/AuthContext"; // Importa el contexto de autenticación
 
-function RutaAdminProtegida({ adminLogeado }) {
+function RutaAdminProtegida() {
+
+  const {user: adminLogeado} = useAuthContext(); // Asegúrate de que useAuthContext esté importado correctamente
+
   const navigate = useNavigate();
 
   useEffect(() => {

@@ -3,9 +3,11 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import CarritoPage from "../pages/CarritoPage";
+import { useAuthContext } from "../contexts/AuthContext";
 
-function RutaProtegidaCarrito({ usuarioLogeado, adminLogeado, productosCarrito, eliminarDelCarrito, vaciarCarrito }) {
+function RutaProtegidaCarrito() {
   const navigate = useNavigate();
+  const {user: usuarioLogeado, admin: adminLogeado } = useAuthContext();
 
   useEffect(() => {
     if (!usuarioLogeado && !adminLogeado) {
@@ -21,7 +23,7 @@ function RutaProtegidaCarrito({ usuarioLogeado, adminLogeado, productosCarrito, 
   }, [usuarioLogeado, adminLogeado, navigate]);
 
   return (usuarioLogeado || adminLogeado)
-    ? <CarritoPage productosCarrito={productosCarrito} eliminarDelCarrito={eliminarDelCarrito} vaciarCarrito={vaciarCarrito} />
+    ? <CarritoPage  />
     : null;
 }
 
