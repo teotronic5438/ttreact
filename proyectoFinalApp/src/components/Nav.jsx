@@ -1,7 +1,13 @@
 import { Link } from 'react-router-dom';
 
+// PARA VER EL SUBINDICE ANTES USABA PROPS AHORA USAREMOS EL CONTEXTO
+import { useContext } from 'react';
+import { CarritoContext } from '../contexts/CarritoContext';
 
-function Nav({productosCarrito}) {  
+function Nav() {  
+
+    const { productosCarrito } = useContext(CarritoContext);
+
     return (  
         <nav style={{ backgroundColor: "#333", color: "white", padding: "10px" }}>  
             <ul style={{ listStyle: "none", display: "flex", justifyContent: "space-around", margin: 0 }}>  

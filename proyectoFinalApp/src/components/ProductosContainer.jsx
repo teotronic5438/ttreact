@@ -5,7 +5,10 @@ import Card from "./Card";
 import Carrito from "./Carrito";
 import Spinner from "./Spinner";
 
-function ProductosContainer({agregarAlCarrito}) {
+// function ProductosContainer({agregarAlCarrito}) {
+function ProductosContainer() {
+
+
     // const [productosCarrito, setProductosCarrito] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
@@ -30,9 +33,9 @@ function ProductosContainer({agregarAlCarrito}) {
     }, []);
 
 
-    function funcionEnProductos(producto, cantidad) {
-        agregarAlCarrito(producto, cantidad);
-    }
+    // function funcionEnProductos(producto, cantidad) {
+    //     agregarAlCarrito(producto, cantidad);
+    // }
 
 
 
@@ -63,7 +66,7 @@ function ProductosContainer({agregarAlCarrito}) {
                         <h3>El carrito está vacío</h3>
                     ) : (
                         productos.map((producto) => (
-                            <Card key={producto.id} producto={producto} funcionCarrito={funcionEnProductos}/>
+                            <Card key={producto.id} producto={producto}/>
                         ))
                     )}
                 </div>

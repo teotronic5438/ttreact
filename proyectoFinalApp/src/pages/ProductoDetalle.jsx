@@ -4,7 +4,18 @@ import "../styles/ProductoDetalle.css";
 import { dispararSweetBasico } from '../assets/SweetAlert';
 import Spinner from '../components/Spinner';
 
-function ProductoDetalle({ agregarAlCarrito }) {
+// function ProductoDetalle({ agregarAlCarrito }) {
+
+
+// USAREMOS AHORA EL CONTEXTO PARA MANEJAR EL CARRITO
+import { useContext } from 'react';
+import { CarritoContext } from '../contexts/CarritoContext';
+
+function ProductoDetalle() {
+
+  // Desestructuración con alias
+  const { agregarAlCarrito } = useContext(CarritoContext);
+
   const { id } = useParams();
   const [producto, setProducto] = useState(null);
   const [cantidad, setCantidad] = useState(1);

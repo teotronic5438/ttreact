@@ -1,7 +1,13 @@
 import "../styles/Carrito.css"
 import { dispararSweetBasico } from "../assets/SweetAlert";
+import { useContext } from "react";
+import { CarritoContext } from "../contexts/CarritoContext";
 
-export default function Carrito({productos, eliminarDelCarritoPages, vaciarCarrito}){
+// export default function Carrito({productos, eliminarDelCarritoPages, vaciarCarrito}){
+export default function Carrito(){
+
+    // Desestructuración con alias
+    const { productosCarrito: productos, eliminarDelCarrito: eliminarDelCarritoPages, vaciarCarrito } = useContext(CarritoContext);
 
     // Calculo el total con reduce
     const total = productos.reduce((acc, prod) => {
