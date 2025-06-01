@@ -19,7 +19,11 @@ function Login() {
                 title: "Éxito",
                 text: "Inicio de sesión exitoso",
                 icon: "success",
-                confirmButtonText: "Aceptar"
+                confirmButtonText: "Aceptar",
+                customClass: {
+                    confirmButton: 'mi-boton-confirmacion'
+                },
+                buttonsStyling: false  // desactiva estilos por defecto de SweetAlert2
             });
             naviagte("/");
         } else {
