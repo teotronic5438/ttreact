@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-// PARA VER EL SUBINDICE ANTES USABA PROPS AHORA USAREMOS EL CONTEXTO
+// PARA VER EL SUBINDICE DE NAV ANTES USABA PROPS AHORA USAREMOS EL CONTEXTO
 import { useContext } from 'react';
 import { CarritoContext } from '../contexts/CarritoContext';
 
