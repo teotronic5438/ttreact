@@ -13,33 +13,34 @@ function Login() {
     const { login, user, logout } = useAuthContext();
     const naviagte = useNavigate();
     
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
 
-        // Simulacion de autenticación
-        if (usuario === "admin" && password === "1234") {
-            login(usuario);
-            Swall.fire({
-                title: "Éxito",
-                text: "Inicio de sesión exitoso",
-                icon: "success",
-                confirmButtonText: "Aceptar",
-                customClass: {
-                    confirmButton: 'mi-boton-confirmacion'
-                },
-                buttonsStyling: false  // desactiva estilos por defecto de SweetAlert2
-            });
-            naviagte("/");
-        } else {
-            Swall.fire({
-                title: "Error",
-                text: "Usuario o contraseña incorrectos",
-                icon: "error",
-                confirmButtonText: "Aceptar"
-            });
-        }
-    }
+    //     // Simulacion de autenticación
+    //     if (usuario === "admin" && password === "1234") {
+    //         login(usuario);
+    //         Swall.fire({
+    //             title: "Éxito",
+    //             text: "Inicio de sesión exitoso",
+    //             icon: "success",
+    //             confirmButtonText: "Aceptar",
+    //             customClass: {
+    //                 confirmButton: 'mi-boton-confirmacion'
+    //             },
+    //             buttonsStyling: false  // desactiva estilos por defecto de SweetAlert2
+    //         });
+    //         naviagte("/");
+    //     } else {
+    //         Swall.fire({
+    //             title: "Error",
+    //             text: "Usuario o contraseña incorrectos",
+    //             icon: "error",
+    //             confirmButtonText: "Aceptar"
+    //         });
+    //     }
+    // }
 
+    // funcion para registrar con correo y contraseña firebase/auth
     function registrarUsuario(e){
         e.preventDefault()
         crearUsuario(usuario, password, naviagte)
@@ -48,19 +49,42 @@ function Login() {
         setPassword("")
     }
 
+    // Funcion para cerrar sesion
     const handleSubmit2 = () => {
         logout()
     }
 
     function iniciarSesionEmailPass(e){
         e.preventDefault()
-        loginEmailPass(userLogin, userPass, naviagte)
-        login(userLogin)
-        setUserLogin("")
-        setUserPass("")
+        loginEmailPass(userLogin, userPass, naviagte).then((user) => {
+            login(user)
+            setUserLogin("")
+            setUserPass("")
+            Swall.fire({
+                title: "Logeo Exitoso",
+                text: "Inicio de sesión exitoso",
+                icon: "success",
+                confirmButtonText: "Aceptar",
+                customClass: {
+                    confirmButton: 'mi-boton-confirmacion'
+                },
+                buttonsStyling: false
+            });
+            naviagte("/login");
+        }).catch((error)=>{
+            // console.log(error);
+            
+            Swall.fire({
+                title: "Error",
+                text: error.code,
+                icon: "error",
+                confirmButtonText: "Aceptar"
+            });
+        })
+
     }
 
-    if (user == "admin"){
+    if (user){
         return(
             <form onSubmit={handleSubmit2}>
                 <button type="submit">Cerrar Session</button>

@@ -16,6 +16,7 @@ const firebaseConfig = {
 
 
 // Initialize Firebase
+// eslint-disable-next-line no-unused-vars
 const app = initializeApp(firebaseConfig);
 
 
@@ -62,18 +63,33 @@ export function crearUsuario(email, password, naviagte){
 }
 
 
-export function loginEmailPass(email, password, naviagte){
-    signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-    // Signed in 
-        console.log("Te logueaste con correo y pass con exito");
-        
-        // console.log("Credenciales: ", userCredential);
-        const user = userCredential.user;
-    // ...
-    })
-    .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-    });
+export function loginEmailPass(email, password){
+
+    // ACA BA EL RETURN 30:03 promesa
+    return(
+
+        new Promise((res, rej) => {
+            signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in 
+                // console.log("Logueo con correo y pass exitoso!");
+                
+                // console.log("Credenciales: ", userCredential);
+                const user = userCredential.user;
+                // console.log(user);
+                res(user)
+                
+            // ...
+            })
+            .catch((error) => {
+                // console.log(error.code, error.message);
+                // const errorCode = error.code;
+                // const errorMessage = error.message;
+                rej(error)
+            });
+        })
+
+    )
+
+
 }
