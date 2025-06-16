@@ -48,7 +48,7 @@ export function crearUsuario(email, password, naviagte){
 
     })
     .catch((error) => {
-        console.log(error.code, error.message);
+        // console.log(error.code, error.message);
         
         // eslint-disable-next-line no-unused-vars
         const errorCode = error.code;
@@ -66,14 +66,14 @@ export function loginEmailPass(email, password, naviagte){
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
     // Signed in 
-        console.log("Te logueaste con exito");
+        console.log("Te logueaste con correo y pass con exito");
         
-        console.log("Credenciales: ", userCredential);
-    const user = userCredential.user;
+        // console.log("Credenciales: ", userCredential);
+        const user = userCredential.user;
     // ...
     })
     .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
+        const errorCode = error.code;
+        const errorMessage = error.message;
     });
 }
