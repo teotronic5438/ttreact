@@ -2,11 +2,15 @@ import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/AuthContext";
 import Swall from "sweetalert2";
+import '../styles/Login.css'
+import { crearUsuario, loginEmailPass } from "../auth/firebase";
 
 function Login() {
     const [usuario, setUsuario] = useState("");
     const [password, setPassword] = useState("");
-    const { login } = useAuthContext();
+    const [userLogin, setUserLogin] = useState("")
+    const [userPass, setUserPass] = useState("")
+    const { login, user, logout } = useAuthContext();
     const naviagte = useNavigate();
     
     const handleSubmit = (e) => {
@@ -36,37 +40,97 @@ function Login() {
         }
     }
 
-    return(
-        <div className="login-container">
+    function registrarUsuario(e){
+        e.preventDefault()
+        crearUsuario(usuario, password, naviagte)
+        login(usuario)
+        setUsuario("")
+        setPassword("")
+    }
 
-            <h2>Iniciar Sesión</h2>
+    const handleSubmit2 = () => {
+        logout()
+    }
 
-            <form onSubmit={handleSubmit}>
+    function iniciarSesionEmailPass(e){
+        e.preventDefault()
+        loginEmailPass(userLogin, userPass, naviagte)
+        login(userLogin)
+        setUserLogin("")
+        setUserPass("")
+    }
 
-                <div className="form-group">
-                    <label htmlFor="usuario">Usuario:</label>
-                    <input
-                        type="text"
-                        id="usuario"
-                        value={usuario}
-                        onChange={(e) => setUsuario(e.target.value)}
-                        required
-                    />
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="password">Contraseña:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                
-                <button type="submit">Iniciar Sesión</button>
+    if (user == "admin"){
+        return(
+            <form onSubmit={handleSubmit2}>
+                <button type="submit">Cerrar Session</button>
             </form>
+        )
+    }
+
+    return(
+        <div className="contenedor-login">
+            <div className="form-sesion login-container">
+                <h2>Iniciar Sesión</h2>
+
+                {/* <form onSubmit={handleSubmit}> */}
+                <form onSubmit={iniciarSesionEmailPass}>
+
+                    <div className="form-group">
+                        <label htmlFor="usuario">Correo:</label>
+                        <input
+                            type="email"
+                            id="usuario"
+                            value={userLogin}
+                            onChange={(e) => setUserLogin(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="password">Contraseña:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={userPass}
+                            onChange={(e) => setUserPass(e.target.value)}
+                            required
+                        />
+                    </div>
+                    
+                    <button type="submit">Iniciar Sesión</button>
+                </form>
+            </div>
+            
+            <div className="form-registrarse login-container">
+                <h2 className="h2-form_registrarse">Registrarse</h2>
+                <form onSubmit={registrarUsuario}>
+
+                    <div className="form-group">
+                        <label htmlFor="usuario">Email:</label>
+                        <input
+                            type="email"
+                            id="usuario"
+                            value={usuario}
+                            onChange={(e) => setUsuario(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="password">Contraseña:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    
+                    <button className="btn-registrarse" type="submit">Registrarse</button>
+                </form>
+            </div>
         </div>
     )
 

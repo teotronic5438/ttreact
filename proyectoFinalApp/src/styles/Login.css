@@ -16,3 +16,36 @@
     cursor: pointer;
     margin: 0.5em 1em;
 }
+
+.contenedor-login{
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.login-container > .h2-form_registrarse{
+    color: #0000cf;
+}
+
+.form-registrarse .btn-registrarse{
+    background-color: rgb(52, 52, 251);
+}
+
+.form-registrarse .btn-registrarse:hover{
+    background-color: rgb(1, 1, 188);
+}
+
+
+.form-registrarse .form-group input {
+  border: 1px solid #ccc;
+  padding: 0.5em 0.75em;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  border-radius: 5px;
+}
+
+/* Foco con sombra sin desplazamiento - VER EL LINEADO OUTLINE */
+.form-registrarse .form-group input:focus {
+  outline: none;
+  border-color: rgb(7, 0, 100);
+  box-shadow: 0 0 6px #268bf7;
+}

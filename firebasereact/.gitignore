@@ -7,12 +7,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-#folder
 node_modules
 dist
 dist-ssr
 *.local
-reactteoria
 
 # Editor directories and files
 .vscode/*
@@ -24,8 +22,3 @@ reactteoria
 *.njsproj
 *.sln
 *.sw?
-
-
-# Archivos de entorno
-.env
-.env*

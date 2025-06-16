@@ -130,7 +130,8 @@ footer {
 **********************/
 
 .login-container {
-  max-width: 400px;
+  max-width: 600px;
+  width: 100%;
   margin: 50px auto;
   padding: 2em;
   background-color: #ffffff;
@@ -160,9 +161,11 @@ form {
   margin-bottom: 0.4em;
   font-weight: bold;
   color: #333;
+  text-align: start;
 }
 
 .form-group input {
+  width: 100%;
   padding: 0.6em;
   border: 1px solid #ccc;
   border-radius: 8px;
