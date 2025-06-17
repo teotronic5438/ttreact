@@ -209,3 +209,8 @@ button[type="submit"]:hover {
 .mi-boton-confirmacion:hover {
   background-color: #006400;
 }
+
+
+.area-agregarProductos{
+  resize: none;
+}

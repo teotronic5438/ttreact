@@ -20,6 +20,7 @@ function Nav() {
                 </Link></li>
                 <li><Link to="/admin" style={{ color: "white", textDecoration: "none" }}>Admin</Link></li>
                 <li><Link to="/login" style={{ color: "white", textDecoration: "none" }}>Login</Link></li>
+                <li><Link to="/admin/agregarProductos" style={{ color: "white", textDecoration: "none" }}>Agregar Productos</Link></li>
             </ul>  
         </nav>  
     );  

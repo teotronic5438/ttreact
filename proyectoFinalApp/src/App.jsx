@@ -13,20 +13,32 @@ import About from './pages/About';
 import Login from './pages/Login';
 import RutaAdminProtegida from './components/RutaAdminProtegida';
 import RutaProtegidaCarrito from './components/RutaProtegidaCarrito'; // ajustá la ruta
+import FormularioProducto from './components/FormularioProducto';
 
 
 function App() {
-  // const [usuarioLogeado, setUsuarioLogeado] = useState(false);
-  // const [adminLogeado, setAdminLogeado] = useState(false);
-  
 
-  // function manejarAdmin() {
-  //   setAdminLogeado(!adminLogeado);
-  // }
+  const agregarProducto = async (producto) => {
+    try {
+      const respuesta = await fetch('https://68150b27225ff1af162af909.mockapi.io/productos', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(producto),
+      });
 
-  // function manejarUsuarioLogeado() {
-  //   setUsuarioLogeado(!usuarioLogeado);
-  // }
+      if (!respuesta.ok) {
+        throw new Error('Error al agregar el producto.');
+      }
+      const data = await respuesta.json();
+      console.log('Producto agregado:', data);
+      alert('Producto agregado correctamente');
+    } catch (error) {
+      console.error(error.message);
+      alert('Hubo un problema al agregar el producto.');
+    }
+  };
 
   return (
     <div className="app-container">
@@ -50,7 +62,9 @@ function App() {
               <Route path='/login' element={<Login />} />
               {/* <Route path='/admin' element={<RutaAdminProtegida adminLogeado={adminLogeado} />} /> */}
               <Route path='/admin' element={<RutaAdminProtegida />} />
+              <Route path='/admin/agregarProductos' element={<FormularioProducto onAgregar={agregarProducto} />} />
               <Route path='*' element={<h1>404 - Página no encontrada</h1>} />
+
             </Routes>
           </div>
 
