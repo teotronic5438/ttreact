@@ -18,27 +18,30 @@ import FormularioProducto from './components/FormularioProducto';
 
 function App() {
 
-  const agregarProducto = async (producto) => {
-    try {
-      const respuesta = await fetch('https://68150b27225ff1af162af909.mockapi.io/productos', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(producto),
-      });
+  // defino la funcion que conectara a la api
+  // Y recibe el productio como parametro de la funcion
+  // const agregarProducto = async (producto) => {
+  //   try {
+  //     const respuesta = await fetch('https://68150b27225ff1af162af909.mockapi.io/productos', {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(producto),
+  //     });
 
-      if (!respuesta.ok) {
-        throw new Error('Error al agregar el producto.');
-      }
-      const data = await respuesta.json();
-      console.log('Producto agregado:', data);
-      alert('Producto agregado correctamente');
-    } catch (error) {
-      console.error(error.message);
-      alert('Hubo un problema al agregar el producto.');
-    }
-  };
+  //     // si la respuesta no esta OK da un error
+  //     if (!respuesta.ok) {
+  //       throw new Error('Error al agregar el producto.');
+  //     }
+  //     const data = await respuesta.json();
+  //     console.log('Producto agregado:', data);
+  //     alert('Producto agregado correctamente');
+  //   } catch (error) {
+  //     console.error(error.message);
+  //     alert('Hubo un problema al agregar el producto.');
+  //   }
+  // };
 
   return (
     <div className="app-container">
@@ -62,7 +65,7 @@ function App() {
               <Route path='/login' element={<Login />} />
               {/* <Route path='/admin' element={<RutaAdminProtegida adminLogeado={adminLogeado} />} /> */}
               <Route path='/admin' element={<RutaAdminProtegida />} />
-              <Route path='/admin/agregarProductos' element={<FormularioProducto onAgregar={agregarProducto} />} />
+              <Route path='/admin/agregarProductos' element={<FormularioProducto />} />
               <Route path='*' element={<h1>404 - Página no encontrada</h1>} />
 
             </Routes>

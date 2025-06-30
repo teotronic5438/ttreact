@@ -17,11 +17,15 @@ function Header(){
         navigate('/login')
     }
 
+    const handleLoginRedirect = () => {
+        navigate('/login');
+    }
+
     return(
         <header className="header">
             <h1 className="titulo">Bienvenido a mi App React</h1>
 
-            {user && (
+            {/* {user && (
                 <div className="menu-container">
                     <button className="user-button" onClick={toggleMenu}>
                         {user.email} ⌄
@@ -33,7 +37,26 @@ function Header(){
                         </div>
                     )}
                 </div>
+            )} */}
+
+            {user ? (
+                <>
+                    <button className="user-button" onClick={toggleMenu}>
+                        {user.email} ⌄
+                    </button>
+
+                    {menuOpen && (
+                        <div className="dropdown-menu">
+                            <button onClick={handleLogOut}>Cerrar sesión</button>
+                        </div>
+                    )}
+                </>
+            ) : (
+                <button className="user-button" onClick={handleLoginRedirect}>
+                        Login
+                </button>
             )}
+
         </header>
     )
 }

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
+import { agregarProducto } from '../assets/request';
+import { dispararSweetBasico } from '../assets/SweetAlert';
 
-function FormularioProducto({ onAgregar }) {    // espera una funcion como parametro
+function FormularioProducto() {    // espera una funcion como parametro
     // declara un producto que se inicializa con un objeto vacio
     const [producto, setProducto] = useState({
         nombre: '',
@@ -53,7 +55,15 @@ function FormularioProducto({ onAgregar }) {    // espera una funcion como param
         e.preventDefault();
         const validarForm = validarFormulario()
         if (validarForm == true) {
-            onAgregar(producto);
+            // onAgregar(producto);     // antes agregabamos desde la funcion en app pero ahora desde request
+            agregarProducto(producto).then(() => {
+                dispararSweetBasico("Producto Agregado", `Se agrego ${producto.nombre} correctamente`, "success", "Cerrar");
+                setProducto({ nombre: '', precio: '', descripcion: '' })
+
+   
+            }).catch((error) => {
+                dispararSweetBasico("Error al cargar el producto", error, "error", "Cerrar")
+            })
             // setProducto({ nombre: '', precio: '', descripcion: '' });
             // setErrores({});
         } else {
@@ -71,6 +81,9 @@ function FormularioProducto({ onAgregar }) {    // espera una funcion como param
         //     {errores.precio && <p style={{ color: 'red' }}>{errores.precio}</p>}
         //     {errores.descripcion && <p style={{ color: 'red' }}>{errores.descripcion}</p>}
         // )
+
+        // IMAGENES O ADMIN (IMAGENES 1:27:29)
+
     };
 
     return ( 
