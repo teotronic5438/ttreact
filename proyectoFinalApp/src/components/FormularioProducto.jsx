@@ -9,6 +9,7 @@ function FormularioProducto() {    // espera una funcion como parametro
         nombre: '',
         precio: '',
         descripcion: '',
+        imagen: ''
     });
     
     const [errores, setErrores] = useState({});
@@ -31,7 +32,9 @@ function FormularioProducto() {    // espera una funcion como parametro
             setErrores(nuevosErrores);
             return('La descripción debe tener al menos 10 caracteres.')
         }
-        else {
+        if(!producto.imagen.trim()){
+            return("La url de la imangen no debe estar vacia")
+        }else {
             return true
         }
         // setErrores(nuevosErrores);
@@ -93,6 +96,13 @@ function FormularioProducto() {    // espera una funcion como parametro
                 <label>Nombre:</label>
                 <input
                 type="text" name="nombre" value={producto.nombre} onChange={handleChange}/>
+                {errores.nombre && <p style={{ color: 'red', textAlign: 'start' }}>{errores.nombre}</p>}
+            </div>
+
+            <div className="form-group">
+                <label>URL de la Imagen:</label>
+                <input 
+                type="text" name="imagen" value={producto.imagen} onChange={handleChange}/>
                 {errores.nombre && <p style={{ color: 'red', textAlign: 'start' }}>{errores.nombre}</p>}
             </div>
             
