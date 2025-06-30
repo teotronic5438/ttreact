@@ -1,10 +1,13 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";   // Para inicializar la conexión con Firebase
+// Funciones de autenticación:
 import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "firebase/auth"
-import { dispararSweetBasico } from "../assets/SweetAlert";
+import { dispararSweetBasico } from "../assets/SweetAlert";     // función personalizada para mostrar alertas
 // eslint-disable-next-line no-unused-vars
 import {GoogleAuthProvider, signInWithPopup} from "firebase/auth"
 
+
+// Objeto con las credenciales de Firebase, cargadas desde variables de entorno (Vite).
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -15,14 +18,14 @@ const firebaseConfig = {
 };
 
 
-// Initialize Firebase
+// Se inicializa Firebase con la configuración
 // eslint-disable-next-line no-unused-vars
 const app = initializeApp(firebaseConfig);
 
 
 
 // Segunda parte de documentacion autenticacion con contraseña
-
+// se obtiene el objeto auth para manejar la autenticación
 const auth = getAuth();
 
 
@@ -62,10 +65,11 @@ export function crearUsuario(email, password, naviagte){
     });
 }
 
-
+// Función que autentica un usuario existente
 export function loginEmailPass(email, password){
 
     // ACA BA EL RETURN 30:03 promesa
+    // Devuelve una Promise para manejar el resultado asíncrono
     return(
 
         new Promise((res, rej) => {
@@ -78,14 +82,19 @@ export function loginEmailPass(email, password){
                 const user = userCredential.user;
                 // console.log(user);
                 res(user)
-                
+                // En éxito: Resuelve la Promise con el objeto user
+                // Paso a user como dato para que sea utilizado
             // ...
             })
             .catch((error) => {
                 // console.log(error.code, error.message);
                 // const errorCode = error.code;
                 // const errorMessage = error.message;
-                rej(error)
+                rej(error.message)
+                
+                
+                // En Fracaso: Rechaza la Promise con el objeto error
+                // Paso a error como dato para que sea utilizado
             });
         })
 

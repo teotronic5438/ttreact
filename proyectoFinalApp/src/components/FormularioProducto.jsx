@@ -37,6 +37,7 @@ function FormularioProducto({ onAgregar }) {    // espera una funcion como param
     };
 
     // va a ser llamada cuando escriba en el input
+    // del evento targen agarra un name y un value
     const handleChange = (e) => {
         const { name, value } = e.target;
         setProducto({ ...producto, [name]: value });
@@ -92,7 +93,7 @@ function FormularioProducto({ onAgregar }) {    // espera una funcion como param
             <div className="form-group">
                 <label>Descripción:</label>
                 <textarea
-                className='area-agregarProductos'
+                className='area-agregarProductos form-control'
                 name="descripcion"
                 value={producto.descripcion}
                 onChange={handleChange}
