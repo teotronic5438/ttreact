@@ -15,6 +15,9 @@ export const AuthProvider = ({ children }) => {
     //Simularemos la creacion de un 
     // token (en una app real, esto sería un JWT o similar)
     const token = `fake-jwt-token-${usuario}`;
+
+    // => test12
+    
     if(usuario.email == "admin@gmail.com"){
       setAdmin(true)
       // nota a agregar usuario???
