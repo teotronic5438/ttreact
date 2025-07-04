@@ -6,12 +6,12 @@ import { useAuthContext } from "../contexts/AuthContext"; // Importa el contexto
 
 function RutaAdminProtegida() {
 
-  const {user: adminLogeado} = useAuthContext(); // Asegúrate de que useAuthContext esté importado correctamente
+  const {admin} = useAuthContext(); // Asegúrate de que useAuthContext esté importado correctamente
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!adminLogeado) {
+    if (!admin) {
       Swal.fire({
         icon: "warning",
         title: "Acceso restringido",
@@ -21,9 +21,9 @@ function RutaAdminProtegida() {
         navigate("/login", { replace: true });
       });
     }
-  }, [adminLogeado, navigate]);
+  }, [admin, navigate]);
 
-  return adminLogeado ? <Admin /> : null;
+  return admin ? <Admin /> : null;
 }
 
 export default RutaAdminProtegida;

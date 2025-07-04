@@ -8,7 +8,7 @@ import { useAuthContext } from '../contexts/AuthContext';
 function Nav() {  
 
     const { productosCarrito } = useContext(CarritoContext);
-    const {user: adminLogeado} = useAuthContext(); // Asegúrate de que useAuthContext esté importado correctamente
+    const {admin} = useAuthContext(); // Asegúrate de que useAuthContext esté importado correctamente
 
     return (  
         <nav style={{ backgroundColor: "#333", color: "white", padding: "10px" }}>  
@@ -20,9 +20,9 @@ function Nav() {
                 <li><Link to="/carrito" style={{ color: "white", textDecoration: "none" }}>
                     Carrito<sup>{productosCarrito.length >0 ? productosCarrito.length : ""}</sup>
                 </Link></li>
-                <li><Link to="/admin" style={{ color: "white", textDecoration: "none" }}>Admin</Link></li>
+                <li> {admin ? <Link to="/admin" style={{ color: "white", textDecoration: "none" }}>Admin</Link> : <></>} </li>
                 {/* <li><Link to="/login" style={{ color: "white", textDecoration: "none" }}>Login</Link></li> */}
-                {(adminLogeado) ?
+                {(admin) ?
                 <li><Link to="/admin/agregarProductos" style={{ color: "white", textDecoration: "none" }}>Agregar Productos</Link></li>
                 : ""}
             </ul>  

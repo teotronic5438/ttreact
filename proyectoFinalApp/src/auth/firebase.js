@@ -2,7 +2,7 @@
 import { initializeApp } from "firebase/app";   // Para inicializar la conexión con Firebase
 // Funciones de autenticación:
 import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword} from "firebase/auth"
-import { dispararSweetBasico } from "../assets/SweetAlert";     // función personalizada para mostrar alertas
+// import { dispararSweetBasico } from "../assets/SweetAlert";     // función personalizada para mostrar alertas
 // eslint-disable-next-line no-unused-vars
 import {GoogleAuthProvider, signInWithPopup} from "firebase/auth"
 
@@ -30,39 +30,46 @@ const auth = getAuth();
 
 
 // la voy a hacer disponible para que pueda usarla cuando quiera
-export function crearUsuario(email, password, naviagte){
+export function crearUsuario(email, password){
+    return(
+        new Promise((res, rej) => {
 
-    createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-        // Signed up 
-        // cuando el usuario se haya podido registrar o crear
-        // muestra las credenciales en consola
-        // console.log("Credenciales: ", userCredential);
+            createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed up 
+                // cuando el usuario se haya podido registrar o crear
+                // muestra las credenciales en consola
+                // console.log("Credenciales: ", userCredential);
 
-        // eslint-disable-next-line no-unused-vars
-        const user = userCredential.user;
-        // console.log(user);
+                const user = userCredential.user;
+                // console.log(user);
 
-        // ...
+                // ...
 
-        dispararSweetBasico("Éxito", "Registro exitoso", "success", "Aceptar")
-        .then(() => {
-            naviagte("/login");  // redirigir después de aceptar
-        });
+                // dispararSweetBasico("Éxito", "Registro exitoso", "success", "Aceptar")
+                // .then(() => {
+                //     naviagte("/login");  // redirigir después de aceptar
+                // });
+                res(user)
 
-    })
-    .catch((error) => {
-        // console.log(error.code, error.message);
-        
-        // eslint-disable-next-line no-unused-vars
-        const errorCode = error.code;
-        // eslint-disable-next-line no-unused-vars
-        const errorMessage = error.message;
-        // ..
+            })
+            .catch((error) => {
+                // console.log(error.code, error.message);
+                
 
-        // Mensaje de error con alerta
-        dispararSweetBasico("Error", error.message, "error", "Aceptar");
-    });
+                // const errorCode = error.code;
+                // // eslint-disable-next-line no-unused-vars
+                // const errorMessage = error.message;
+                // // ..
+
+                // // Mensaje de error con alerta
+                // dispararSweetBasico("Error", error.message, "error", "Aceptar");
+                rej(error)
+            });
+
+        })
+    )
+
 }
 
 // Función que autentica un usuario existente
@@ -90,8 +97,8 @@ export function loginEmailPass(email, password){
                 // console.log(error.code, error.message);
                 // const errorCode = error.code;
                 // const errorMessage = error.message;
-                rej(error.message)
-                
+                // rej(error.message)
+                rej(error)
                 
                 // En Fracaso: Rechaza la Promise con el objeto error
                 // Paso a error como dato para que sea utilizado

@@ -49,3 +49,15 @@
   border-color: rgb(7, 0, 100);
   box-shadow: 0 0 6px #268bf7;
 }
+
+.pielinkform{
+    margin: 1em;
+}
+.pielinkform > a{
+    color: #0000ef;
+    margin-left: 0.5em;
+}
+.pielinkform > a:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
