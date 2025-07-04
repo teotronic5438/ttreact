@@ -17,7 +17,7 @@ export const agregarProducto = (producto) => {
                     throw new Error('Error al agregar el producto.');
                 }
                 const data = await respuesta.json();
-                console.log('Producto agregado:', data);
+                // console.log('Producto agregado:', data);
                 // alert('Producto agregado correctamente');
                 resolve(data)
             } catch (error) {

@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom';
 // PARA VER EL SUBINDICE DE NAV ANTES USABA PROPS AHORA USAREMOS EL CONTEXTO
 import { useContext } from 'react';
 import { CarritoContext } from '../contexts/CarritoContext';
+import { useAuthContext } from '../contexts/AuthContext';
 
 function Nav() {  
 
     const { productosCarrito } = useContext(CarritoContext);
+    const {user: adminLogeado} = useAuthContext(); // Asegúrate de que useAuthContext esté importado correctamente
 
     return (  
         <nav style={{ backgroundColor: "#333", color: "white", padding: "10px" }}>  
@@ -19,8 +21,10 @@ function Nav() {
                     Carrito<sup>{productosCarrito.length >0 ? productosCarrito.length : ""}</sup>
                 </Link></li>
                 <li><Link to="/admin" style={{ color: "white", textDecoration: "none" }}>Admin</Link></li>
-                <li><Link to="/login" style={{ color: "white", textDecoration: "none" }}>Login</Link></li>
+                {/* <li><Link to="/login" style={{ color: "white", textDecoration: "none" }}>Login</Link></li> */}
+                {(adminLogeado) ?
                 <li><Link to="/admin/agregarProductos" style={{ color: "white", textDecoration: "none" }}>Agregar Productos</Link></li>
+                : ""}
             </ul>  
         </nav>  
     );  

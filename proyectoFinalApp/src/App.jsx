@@ -14,6 +14,7 @@ import Login from './pages/Login';
 import RutaAdminProtegida from './components/RutaAdminProtegida';
 import RutaProtegidaCarrito from './components/RutaProtegidaCarrito'; // ajustá la ruta
 import FormularioProducto from './components/FormularioProducto';
+import RutaAgregarProtegido from './components/RutaAgregarProtegido';
 
 
 function App() {
@@ -65,7 +66,8 @@ function App() {
               <Route path='/login' element={<Login />} />
               {/* <Route path='/admin' element={<RutaAdminProtegida adminLogeado={adminLogeado} />} /> */}
               <Route path='/admin' element={<RutaAdminProtegida />} />
-              <Route path='/admin/agregarProductos' element={<FormularioProducto />} />
+              {/* <Route path='/admin/agregarProductos' element={<FormularioProducto />} /> */}
+              <Route path='/admin/agregarProductos' element={<RutaAgregarProtegido />} />
               <Route path='*' element={<h1>404 - Página no encontrada</h1>} />
 
             </Routes>

@@ -61,7 +61,7 @@ function FormularioProducto() {    // espera una funcion como parametro
             // onAgregar(producto);     // antes agregabamos desde la funcion en app pero ahora desde request
             agregarProducto(producto).then(() => {
                 dispararSweetBasico("Producto Agregado", `Se agrego ${producto.nombre} correctamente`, "success", "Cerrar");
-                setProducto({ nombre: '', precio: '', descripcion: '' })
+                setProducto({ nombre: '', precio: '', descripcion: '' , imagen: ""})
 
    
             }).catch((error) => {
