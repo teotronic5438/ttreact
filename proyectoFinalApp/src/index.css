@@ -214,3 +214,18 @@ button[type="submit"]:hover {
 .area-agregarProductos{
   resize: none;
 }
+
+/* agregar productos */
+.container-form{
+  width: 600px;
+  margin: 0 auto;
+}
+.boton-agregar[type="submit"]{
+  font-size: 1em;
+  font-weight: lighter;
+}
+.boton-agregar:hover{
+  background-color: #68f768;
+  font-weight: bold;
+  box-shadow: 2px 2px 5px rgba(104, 247, 104, 0.4);
+}

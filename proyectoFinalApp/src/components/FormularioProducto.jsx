@@ -90,42 +90,44 @@ function FormularioProducto() {    // espera una funcion como parametro
     };
 
     return ( 
-        <form onSubmit={handleSubmit2}>
-            <h2>Agregar Producto</h2>
-            <div className="form-group">
-                <label>Nombre:</label>
-                <input
-                type="text" name="nombre" value={producto.nombre} onChange={handleChange}/>
-                {errores.nombre && <p style={{ color: 'red', textAlign: 'start' }}>{errores.nombre}</p>}
-            </div>
+        <div className="container-form">
+            <form onSubmit={handleSubmit2}>
+                <h2>Agregar Producto</h2>
+                <div className="form-group">
+                    <label>Nombre:</label>
+                    <input
+                    type="text" name="nombre" value={producto.nombre} onChange={handleChange}/>
+                    {errores.nombre && <p style={{ color: 'red', textAlign: 'start' }}>{errores.nombre}</p>}
+                </div>
 
-            <div className="form-group">
-                <label>URL de la Imagen:</label>
-                <input 
-                type="text" name="imagen" value={producto.imagen} onChange={handleChange}/>
-                {errores.nombre && <p style={{ color: 'red', textAlign: 'start' }}>{errores.nombre}</p>}
-            </div>
-            
-            <div className="form-group">
-                <label>Precio:</label>
-                <input type="number" name="precio" value={producto.precio} onChange={handleChange} required
-                min="0"/>
-                {errores.precio && <p style={{ color: 'red', textAlign: 'start'}}>{errores.precio}</p>}
-            </div>
+                <div className="form-group">
+                    <label>URL de la Imagen:</label>
+                    <input 
+                    type="text" name="imagen" value={producto.imagen} onChange={handleChange}/>
+                    {errores.nombre && <p style={{ color: 'red', textAlign: 'start' }}>{errores.nombre}</p>}
+                </div>
+                
+                <div className="form-group">
+                    <label>Precio:</label>
+                    <input type="number" name="precio" value={producto.precio} onChange={handleChange} required
+                    min="0"/>
+                    {errores.precio && <p style={{ color: 'red', textAlign: 'start'}}>{errores.precio}</p>}
+                </div>
 
-            <div className="form-group">
-                <label>Descripción:</label>
-                <textarea
-                className='area-agregarProductos form-control'
-                name="descripcion"
-                value={producto.descripcion}
-                onChange={handleChange}
-                required
-                />
-                {errores.descripcion && <p style={{ color: 'red', textAlign: 'start'}}>{errores.descripcion}</p>}
-            </div>
-            <button type="submit">Agregar Producto</button>
-        </form>
+                <div className="form-group">
+                    <label>Descripción:</label>
+                    <textarea
+                    className='area-agregarProductos form-control'
+                    name="descripcion"
+                    value={producto.descripcion}
+                    onChange={handleChange}
+                    required
+                    />
+                    {errores.descripcion && <p style={{ color: 'red', textAlign: 'start'}}>{errores.descripcion}</p>}
+                </div>
+                <button className='boton-agregar' type="submit">Agregar Producto</button>
+            </form>
+        </div>
     );
 }
 
