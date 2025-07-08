@@ -29,3 +29,19 @@ export const agregarProducto = (producto) => {
     )
 
 };
+
+export const eliminarProducto = async (id) => {
+ const confirmar = window.confirm('¿Estás seguro de eliminar?');
+ if (confirmar) {
+    try {
+        const respuesta = await fetch(`https://mockapi.io/api/v1/productos/${id}`, {
+            method: 'DELETE',
+        });
+        if (!respuesta.ok) throw new Error('Error al eliminar');
+        alert('Producto eliminado correctamente.');
+    } catch (error) {
+        console.error(error.message);
+        alert('Hubo un problema al eliminar el producto.');
+    }
+ }
+};

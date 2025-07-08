@@ -4,32 +4,36 @@ import "../styles/ProductosContainer.css";
 import Card from "./Card";
 import Carrito from "./Carrito";
 import Spinner from "./Spinner";
+import { useProductosContext } from "../contexts/ProductosContext";
 
 // function ProductosContainer({agregarAlCarrito}) {
 function ProductosContainer() {
 
-
+    const {productos, obtenerProductos} = useProductosContext();
     // const [productosCarrito, setProductosCarrito] = useState([]);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
-    const [productos, setProductos] = useState([]);
+    // const [productos, setProductos] = useState([]);
 
     useEffect(() => {
-      fetch("https://68150b27225ff1af162af909.mockapi.io/productos")
-      .then((response) => response.json())
-      .then((data) => {
-        // console.log(data);
-        // setProductosCarrito(data);
-        setProductos(data); // Guardamos los productos en el estado
-        setCargando(false);  // esto servira para desactivar el spinner
-        setError(null);     // esto servira para desactivar el spinner
+    //   fetch("https://68150b27225ff1af162af909.mockapi.io/productos")
+        
+        obtenerProductos()
+        // eslint-disable-next-line no-unused-vars
+        .then((productos) => {
+            // console.log(data);
+            // setProductosCarrito(data);
+            // setProductos(data); // Guardamos los productos en el estado
+            setCargando(false);  // esto servira para desactivar el spinner
+            setError(null);     // esto servira para desactivar el spinner
 
-      })
-      .catch((error) => {
-        console.error("Error al obtener los productos:", error);
-        setCargando(false);
-        setError("Error al obtener los productos");
-      });
+        })
+        .catch((error) => {
+            console.error("Error al obtener los productos:", error);
+            setCargando(false);
+            setError("Error al obtener los productos");
+        });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
 

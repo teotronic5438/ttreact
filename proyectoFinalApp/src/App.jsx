@@ -15,6 +15,7 @@ import RutaAdminProtegida from './components/RutaAdminProtegida';
 import RutaProtegidaCarrito from './components/RutaProtegidaCarrito'; // ajustá la ruta
 import FormularioProducto from './components/FormularioProducto';
 import RutaAgregarProtegido from './components/RutaAgregarProtegido';
+import FormularioEdicion from './components/FormularioEdicion';
 
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
               <Route path='/admin' element={<RutaAdminProtegida />} />
               {/* <Route path='/admin/agregarProductos' element={<FormularioProducto />} /> */}
               <Route path='/admin/agregarProductos' element={<RutaAgregarProtegido />} />
+              <Route path='admin/editarProducto/:id' element={<FormularioEdicion />} />
               <Route path='*' element={<h1>404 - Página no encontrada</h1>} />
 
             </Routes>

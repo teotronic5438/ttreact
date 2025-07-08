@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-import { agregarProducto } from '../assets/request';
+// import { agregarProducto } from '../assets/request';
 import { dispararSweetBasico } from '../assets/SweetAlert';
+import { useProductosContext } from '../contexts/ProductosContext';
 
 function FormularioProducto() {    // espera una funcion como parametro
+    const {agregarProducto} = useProductosContext();
+
     // declara un producto que se inicializa con un objeto vacio
     const [producto, setProducto] = useState({
         nombre: '',

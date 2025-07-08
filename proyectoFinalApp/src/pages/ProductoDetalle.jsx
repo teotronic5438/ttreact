@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import "../styles/ProductoDetalle.css";
 import { dispararSweetBasico } from '../assets/SweetAlert';
@@ -10,98 +10,113 @@ import Spinner from '../components/Spinner';
 // USAREMOS AHORA EL CONTEXTO PARA MANEJAR EL CARRITO
 import { useContext } from 'react';
 import { CarritoContext } from '../contexts/CarritoContext';
+import { useAuthContext } from '../contexts/AuthContext';
+import { useProductosContext } from '../contexts/ProductosContext';
 
 function ProductoDetalle() {
 
-  // Desestructuración con alias
-  const { agregarAlCarrito } = useContext(CarritoContext);
+    const {admin} = useAuthContext();
 
-  const { id } = useParams();
-  const [producto, setProducto] = useState(null);
-  const [cantidad, setCantidad] = useState(1);
-  const [cargando, setCargando] = useState(true);
-  const [error, setError] = useState(null);
+    // Desestructuración con alias
+    const { agregarAlCarrito } = useContext(CarritoContext);
+    const {obtenerProducto} = useProductosContext();
 
-  const aumentarCantidad = () => setCantidad((prev) => prev + 1);
+    const { id } = useParams();
+    const [producto, setProducto] = useState(null);
+    const [cantidad, setCantidad] = useState(1);
+    const [cargando, setCargando] = useState(true);
+    const [error, setError] = useState(null);
 
-  const disminuirCantidad = () => {
-      if (cantidad > 1) setCantidad((prev) => prev - 1);
-  };
+    const aumentarCantidad = () => setCantidad((prev) => prev + 1);
 
-const actualizarCantidad = (e) => {
-    const value = parseInt(e.target.value);
-    if (!isNaN(value) && value >= 1) {
-        setCantidad(value);
-    }
-};
+    const disminuirCantidad = () => {
+        if (cantidad > 1) setCantidad((prev) => prev - 1);
+    };
 
-  useEffect(() => {
-    fetch(`https://68150b27225ff1af162af909.mockapi.io/productos/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setProducto(data)
-        setCargando(false);
-        setError(null);    
-      })
-      .catch((error) => {
-        console.error("Error al obtener los productos:", error);
-        setCargando(false);
-        setError("Error al obtener los productos");
-      });
-  }, [id]);
+    const actualizarCantidad = (e) => {
+        const value = parseInt(e.target.value);
+        if (!isNaN(value) && value >= 1) {
+            setCantidad(value);
+        }
+    };
 
-  const handleAgregar = () => {
-    if (producto) {
-        dispararSweetBasico(
-            "Producto agregado",
-            `Has agregado ${producto.nombre} al carrito`,
-            "success",
-            "Aceptar"
-        );
-        agregarAlCarrito(producto, cantidad);
-    }
-  };
+    useEffect(() => {
+      // fetch(`https://68150b27225ff1af162af909.mockapi.io/productos/${id}`)
+      //   .then((res) => res.json())
+        obtenerProducto(id)
+        .then((data) => {
+          setProducto(data)
+          setCargando(false);
+          setError(null);    
+        })
+        .catch((error) => {
+          // console.error("Error al obtener los productos:", error);
+          if(error == "Producto no encontrado"){
+            setError("Producto no encontrado");
+          }
+          setCargando(false);
+        });
+    }, [id, obtenerProducto]);
 
-  // agregarmos logica para renderizado por spinner, error o productos
-  if (cargando) {
+    const handleAgregar = () => {
+      if (producto) {
+          dispararSweetBasico(
+              "Producto agregado",
+              `Has agregado ${producto.nombre} al carrito`,
+              "success",
+              "Aceptar"
+          );
+          agregarAlCarrito(producto, cantidad);
+      }
+    };
 
-    return (<Spinner />);
+    // agregarmos logica para renderizado por spinner, error o productos
+    if (cargando) {
 
-  } else if (error) {
+      return (<Spinner />);
 
-      // Si hay un error, renderizamos el mensaje de error
-      return <div className="error">Error: {error}</div>;
+    } else if (error) {
 
-  } else {
+        // Si hay un error, renderizamos el mensaje de error
+        return <div className="error">Error: {error}</div>;
 
-    return (
-      <div className="producto-detalle">
+    } else {
 
-        <img src={producto.imagen} alt={producto.nombre} className="detalle-imagen" />
+      return (
+        <div className="producto-detalle">
 
-        <div className="detalle-info">
-            <h2>{producto.nombre}</h2>
-            <p>{producto.descripcion}</p>
-            <p className="detalle-precio">Precio: ${producto.precio}</p>
-            <div className="control-cantidad">
-                <button onClick={disminuirCantidad}>−</button>
-                <input 
-                    type="number" 
-                    value={cantidad} 
-                    onChange={actualizarCantidad} 
-                    min="1" 
-                    style={{ width: "40px", textAlign: "center" }}
-                />
-                <button onClick={aumentarCantidad}>+</button>
-            </div>
+          <img src={producto.imagen} alt={producto.nombre} className="detalle-imagen" />
 
-            <button onClick={handleAgregar} className="btn-agregar">
-                Agregar al carrito
-            </button>
+          <div className="detalle-info">
+              <h2>{producto.nombre}</h2>
+              <p>{producto.descripcion}</p>
+              <p className="detalle-precio">Precio: ${producto.precio}</p>
+              <div className="control-cantidad">
+                  <button onClick={disminuirCantidad}>−</button>
+                  <input 
+                      type="number" 
+                      value={cantidad} 
+                      onChange={actualizarCantidad} 
+                      min="1" 
+                      style={{ width: "40px", textAlign: "center" }}
+                  />
+                  <button onClick={aumentarCantidad}>+</button>
+              </div>
+              {admin 
+              ? <Link to={"/admin/editarProducto/" + id}>
+                  <button className="btn-agregar">
+                    Editar Producto
+                  </button>
+                </Link>
+              :
+                <button onClick={handleAgregar} className="btn-agregar">
+                    Agregar al carrito
+                </button>
+              }
+          </div>
         </div>
-      </div>
-    );
-  }
+      );
+    }
 }
 
 export default ProductoDetalle;
