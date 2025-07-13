@@ -1,4 +1,5 @@
 import { createContext, useContext, useState } from "react";
+// import { data } from "react-router-dom";
 
 // Crear el contexto
 const ProductosContext = createContext();
@@ -139,8 +140,32 @@ export function ProductosProvider({ children }){
         }
     }
 
+    // Uso la funcion eliminar productos dentro del contexto
+    async function eliminarProducto(id) {
+        try {
+            const respuesta = await fetch(`https://68150b27225ff1af162af909.mockapi.io/productos/${id}`, {
+                method: 'DELETE'
+            });
+
+            if (!respuesta.ok) {
+                throw new Error('Error al eliminar el producto');
+            }
+
+            const data = await respuesta.json();
+
+            // actualizo el estado local de los productos ya cargados
+            setProductos(productos.filter(producto => producto.id !== id));
+
+            return data;
+        } catch (error) {
+            console.error("Error en eliminarProducto:", error);
+            throw error;
+        }
+    }
+
+
     return(
-        <ProductosContext.Provider value={{obtenerProductos, productos, agregarProducto, obtenerProducto, editarProducto}}>
+        <ProductosContext.Provider value={{obtenerProductos, productos, agregarProducto, obtenerProducto, editarProducto, eliminarProducto}}>
             {children}
         </ProductosContext.Provider>
     )

@@ -229,3 +229,20 @@ button[type="submit"]:hover {
   font-weight: bold;
   box-shadow: 2px 2px 5px rgba(104, 247, 104, 0.4);
 }
+.btn-agregar:hover{
+  background-color: darkgreen;
+  box-shadow: 2px 2px 5px rgba(104, 247, 104, 0.4);
+}
+.btn-eliminar{
+  padding: 0.8em;
+  background-color: rgb(255, 24, 24);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.btn-eliminar:hover{
+  background-color: darkred;
+  box-shadow: 2px 2px 5px rgba(104, 247, 104, 0.4);
+}

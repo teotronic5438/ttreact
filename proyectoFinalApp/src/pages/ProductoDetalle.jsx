@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import "../styles/ProductoDetalle.css";
 import { dispararSweetBasico } from '../assets/SweetAlert';
@@ -12,10 +12,12 @@ import { useContext } from 'react';
 import { CarritoContext } from '../contexts/CarritoContext';
 import { useAuthContext } from '../contexts/AuthContext';
 import { useProductosContext } from '../contexts/ProductosContext';
+import Swal from 'sweetalert2';
 
 function ProductoDetalle() {
 
     const {admin} = useAuthContext();
+    const { eliminarProducto } = useProductosContext(); 
 
     // Desestructuración con alias
     const { agregarAlCarrito } = useContext(CarritoContext);
@@ -26,6 +28,8 @@ function ProductoDetalle() {
     const [cantidad, setCantidad] = useState(1);
     const [cargando, setCargando] = useState(true);
     const [error, setError] = useState(null);
+
+    const navigate = useNavigate();
 
     const aumentarCantidad = () => setCantidad((prev) => prev + 1);
 
@@ -70,6 +74,42 @@ function ProductoDetalle() {
       }
     };
 
+    const handleEliminar = () => {
+      Swal.fire({
+          title: '¿Estás seguro?',
+          text: "Esta acción eliminará el producto permanentemente.",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#d33',
+          cancelButtonColor: '#3085d6',
+          confirmButtonText: 'Sí, eliminar',
+          cancelButtonText: 'Cancelar'
+      }).then((result) => {
+          if (result.isConfirmed) {
+            eliminarProducto(id)
+              .then(() => {
+                Swal.fire({
+                  title: 'Eliminado',
+                  text: 'El producto fue eliminado correctamente.',
+                  icon: 'success',
+                  confirmButtonText: 'Aceptar'
+                }).then(() => {
+                  navigate('/productos');
+                });
+              })
+              .catch((error) => {
+                Swal.fire({
+                  title: 'Error',
+                  text: 'Hubo un problema al eliminar el producto: ' + error.message,
+                  icon: 'error',
+                  confirmButtonText: 'Cerrar'
+                });
+              });
+          }
+        });
+    };
+
+
     // agregarmos logica para renderizado por spinner, error o productos
     if (cargando) {
 
@@ -103,11 +143,14 @@ function ProductoDetalle() {
                   <button onClick={aumentarCantidad}>+</button>
               </div>
               {admin 
-              ? <Link to={"/admin/editarProducto/" + id}>
-                  <button className="btn-agregar">
-                    Editar Producto
-                  </button>
-                </Link>
+              ? <div>
+                  <Link to={"/admin/editarProducto/" + id}>
+                    <button className="btn-agregar">
+                      Editar Producto
+                    </button>
+                  </Link>
+                  &nbsp; <button className="btn-eliminar" onClick={handleEliminar}>Eliminar Producto</button>
+                </div>
               :
                 <button onClick={handleAgregar} className="btn-agregar">
                     Agregar al carrito
