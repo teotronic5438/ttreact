@@ -113,7 +113,7 @@ function FormularioProducto() {    // espera una funcion como parametro
                 <div className="form-group">
                     <label>Precio:</label>
                     <input type="number" name="precio" value={producto.precio} onChange={handleChange} required
-                    min="0"/>
+                    min="0" step="0.01"/>
                     {errores.precio && <p style={{ color: 'red', textAlign: 'start'}}>{errores.precio}</p>}
                 </div>
 
