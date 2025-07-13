@@ -86,8 +86,61 @@ export function ProductosProvider({ children }){
         )
     }
 
+    // funcion para editar un producto, en el contexto
+    // function editarProducto(producto){
+    //     return new Promise(async(res, rej) => {
+    //         try{
+    //             const respuesta = await fetch(`https://68150b27225ff1af162af909.mockapi.io/productos/${id}`, {
+    //                 method: 'PUT',
+    //                 headers: {
+    //                     'Content-Type': 'application/json',
+    //                 },
+    //                 body: JSON.stringify(producto)
+    //             });
+
+    //             if(!respuesta.ok){
+    //                 throw new Error('Error al actualizar producto');
+    //             }
+    //             const data = await respuesta.json();
+    //             res(data)
+    //             alert('Producto actualizado correctamente.');
+    //         } catch (error){
+    //             console.error(error.message);
+    //             alert('Hubo un probblema al actualizar el producto: ' + error.message)
+    //             rej(error)
+    //         }
+    //     })
+    // }
+
+    // Función para editar un producto, en el contexto
+    async function editarProducto(producto) {
+        try {
+            const respuesta = await fetch(`https://68150b27225ff1af162af909.mockapi.io/productos/${producto.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(producto)
+            });
+
+            if(!respuesta.ok) {
+                throw new Error('Error al actualizar producto');
+            }
+            
+            const data = await respuesta.json();
+            // alert('Producto actualizado correctamente.');
+            // reemplazo el res por return (async / await)
+            return data;
+        } catch (error) {
+            console.error(error.message);
+            // alert('Hubo un problema al actualizar el producto: ' + error.message);
+            // reemaplazo el rej por throw
+            throw error;
+        }
+    }
+
     return(
-        <ProductosContext.Provider value={{obtenerProductos, productos, agregarProducto, obtenerProducto}}>
+        <ProductosContext.Provider value={{obtenerProductos, productos, agregarProducto, obtenerProducto, editarProducto}}>
             {children}
         </ProductosContext.Provider>
     )

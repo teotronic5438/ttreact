@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams, useNavigate } from "react-router-dom";
 import { useProductosContext } from "../contexts/ProductosContext";
 import Spinner from "./Spinner";
+import Swal from 'sweetalert2';
+import { useAuthContext } from "../contexts/AuthContext"
 
 function FormularioEdicion(){
+    const navigate = useNavigate();
+
+    const {admin} = useAuthContext()
     // const [producto, setProducto] = useState(productoSeleccionado);
     const {id} = useParams();
     // const [productoSeleccionado, setProductoSeleccionado] = useState(null)
-    const {obtenerProducto} = useProductosContext()
+    const {obtenerProducto, editarProducto} = useProductosContext()
     const [producto, setProducto] = useState({
         nombre: '',
         precio: '',
@@ -32,6 +37,31 @@ function FormularioEdicion(){
         });
     }, [id, obtenerProducto])
 
+    // Si no esta logeado como admin (auth), lo redirige al login
+    if(!admin){
+        return(
+            <Navigate to="/login" replace />
+        )
+    }
+
+    const validarFormulario = () => {
+        if (!producto.nombre.trim()) {
+            return("El nombre es obligatorio")
+        }
+        if (!producto.precio || producto.precio <= 0) {
+            return('El precio debe ser mayor a 0.')
+        }
+        if (!producto.descripcion.trim() || producto.descripcion.length < 10) {
+            return('La descripción debe tener al menos 10 caracteres.')
+        }
+        if(!producto.imagen.trim()){
+            return("La url de la imangen no debe estar vacia")
+        }else {
+            return true
+        }
+    };
+
+
     // vuelve a setear el producto cada vez que cambia
     // useEffect(()=>{
     //     setProducto(productoSeleccionado)
@@ -48,27 +78,41 @@ function FormularioEdicion(){
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try{
-            const respuesta = await fetch(`https://68150b27225ff1af162af909.mockapi.io/productos/${id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(producto)
-            });
-
-            if(!respuesta.ok){
-                throw new Error('Error al actualizar producto');
-            }
-
-            const data = await respuesta.json();
-
-            onActualizar(data);
-            alert('Producto actualizado correctamente.');
-        } catch (error){
-            console.error(error.message);
-            alert('Hubo un probblema al actualizar el producto')
+        const validarForm = validarFormulario()
+        if(validarForm){
+            editarProducto(producto).then((productoEditado) => {
+                Swal.fire({
+                    title: "Edicion Finalizada",
+                    text: `${productoEditado.nombre} ha sido actualizado correctamente`,
+                    icon: "success",
+                    confirmButtonText: "Aceptar"
+                }).then(() => {
+                    setProducto({
+                        nombre: '',
+                        precio: '',
+                        descripcion: '',
+                        imagen:''
+                    })
+                    navigate("/productos");
+                })
+            }).catch((error) => {
+                Swal.fire({
+                    title: "Error",
+                    text: "Error al actualizar el producto: " + error.message,
+                    icon: "error",
+                    confirmButtonText: "Cerrar"
+                })
+            })
+        } else {
+            Swal.fire({
+                title: "Error en carga del producto",
+                text: validarForm,
+                icon: "error",
+                confirmButtonText: "Cerrar"
+            })
+            
         }
+
     };
 
     // agregarmos logica para renderizado por spinner, error o productos
@@ -110,12 +154,13 @@ function FormularioEdicion(){
                     <div className="form-group">
                         <label>Precio:</label>
                         <input
-                        type="number"
-                        name="precio"
-                        value={producto.precio || ''}
-                        onChange={handleChange}
-                        required
-                        min="0"
+                            type="number"
+                            name="precio"
+                            value={producto.precio || ''}
+                            onChange={handleChange}
+                            required
+                            min="0"
+                            step="0.01"
                         />
                     </div>
                     <div className="form-group">
