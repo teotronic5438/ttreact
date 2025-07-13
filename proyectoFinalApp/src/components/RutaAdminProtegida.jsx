@@ -3,15 +3,16 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import Admin from "../pages/Admin"; // ajustá el path si es necesario
 import { useAuthContext } from "../contexts/AuthContext"; // Importa el contexto de autenticación
+import Spinner from "./Spinner";
 
 function RutaAdminProtegida() {
 
-  const {admin} = useAuthContext(); // Asegúrate de que useAuthContext esté importado correctamente
+  const {admin, loading } = useAuthContext(); // Asegúrate de que useAuthContext esté importado correctamente
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!admin) {
+    if (!loading && !admin) {
       Swal.fire({
         icon: "warning",
         title: "Acceso restringido",
@@ -21,8 +22,9 @@ function RutaAdminProtegida() {
         navigate("/login", { replace: true });
       });
     }
-  }, [admin, navigate]);
+  }, [admin, navigate, loading]);
 
+  if (loading) return <Spinner />
   return admin ? <Admin /> : null;
 }
 
