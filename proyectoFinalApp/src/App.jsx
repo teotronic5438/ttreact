@@ -2,7 +2,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
-import Nav from './components/Nav';
+import Nav from './components/NavBar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Productos from './pages/Productos';
@@ -16,6 +16,7 @@ import RutaProtegidaCarrito from './components/RutaProtegidaCarrito'; // ajustá
 import FormularioProducto from './components/FormularioProducto';
 import RutaAgregarProtegido from './components/RutaAgregarProtegido';
 import FormularioEdicion from './components/FormularioEdicion';
+import NavBar from './components/NavBar';
 
 
 function App() {
@@ -49,7 +50,7 @@ function App() {
     <div className="app-container">
       <Router>
           <Header />
-          <Nav />
+          <NavBar />
           <div className="main-content">
             <Routes>
               <Route path='/' element={<Home />} />
