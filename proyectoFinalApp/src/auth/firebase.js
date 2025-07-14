@@ -109,3 +109,74 @@ export function loginEmailPass(email, password){
 
 
 }
+
+/************************
+    base de datos
+*************************/
+
+// addDoc: Para añadir nuevos documentos a una colección
+
+// collection: Para hacer referencia a una colección en Firestore
+
+// getDocs: Para obtener documentos de una colección
+
+// getFirestore: Para obtener la instancia de Firestore
+
+import {addDoc, collection, getDocs, getFirestore} from "firebase/firestore";
+
+//  inicializando el servicio de Firestore
+// getFirestore(app) obtiene una instancia de Firestore asociada a tu aplicación Firebase
+const db = getFirestore(app)    // db será tu objeto de base de datos principal para interactuar con Firestore
+
+export function crearProducto(nombre, imagen, precio, descripcion){
+    // eslint-disable-next-line no-async-promise-executor
+    return new Promise(async (res, rej) => {
+        try{
+            const docRef = await addDoc(collection(db, "productos"), {
+                nombre: nombre,
+                imagen: imagen,
+                precio: precio,
+                descripcion: descripcion
+            });
+
+            console.log("Docuemnto written with ID: ", docRef.id);
+            res(docRef)
+        } catch(e) {
+            console.error("Error adding document: ", e)
+            rej(e)
+        }
+    });
+}
+
+export function obtenerProductos(){
+    return(
+        // eslint-disable-next-line no-async-promise-executor
+        new Promise(async (res, rej) => {
+            try{
+                const querySnapshot = await getDocs(collection(db, 'productos'));
+                console.log(querySnapshot, "respuesta al getDocs");
+                
+
+                const resultados = querySnapshot.docs.map(doc => {
+                    console.log(doc, "doc sin ejecutar metodo data()");
+                    
+                    const data = doc.data();
+                    console.log(data, "doc con data extraido");
+                    
+                    return{
+                        id: doc.id,
+                        name: data.name,
+                        imagen: data.imagen,
+                        precio: data.precio,
+                        descripcion: data.descripcion
+                    };
+                });
+
+                res(resultados)
+            } catch(error) {
+                console.error("Error al obtener los productos: " + error)
+                rej(error)
+            }
+        })
+    );
+}

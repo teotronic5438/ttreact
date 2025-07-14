@@ -23,7 +23,7 @@ function Header(){
 
     return(
         <header className="header">
-            <h1 className="titulo">Bienvenido a mi App React</h1>
+            <h1 className="titulo">Teotronic</h1>
 
             {/* {user && (
                 <div className="menu-container">
