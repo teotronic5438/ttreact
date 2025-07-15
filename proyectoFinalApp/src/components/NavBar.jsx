@@ -97,9 +97,9 @@ function NavBar() {
     navigate("/login");
   };
 
-  const handleLoginRedirect = () => {
-    navigate("/login");
-  };
+  // const handleLoginRedirect = () => {
+  //   navigate("/login");
+  // };
 
   return (
     <Navbar bg="dark" variant="dark" expand="md" collapseOnSelect>
@@ -117,16 +117,38 @@ function NavBar() {
 
         <Navbar.Toggle aria-controls="nav-bar" />
         <Navbar.Collapse id="nav-bar">
-          <Nav className="me-auto">
+          <Nav className="ms-auto">
             <Nav.Link as={Link} to="/">Inicio</Nav.Link>
             <Nav.Link as={Link} to="/productos">Productos</Nav.Link>
             <Nav.Link as={Link} to="/about">Nosotros</Nav.Link>
             <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
             {admin && <Nav.Link as={Link} to="/admin">Admin</Nav.Link>}
             {admin && <Nav.Link as={Link} to="/admin/agregarProductos">Agregar Productos</Nav.Link>}
+            <Nav.Link as={Link} to="/carrito">
+              <FaShoppingCart />
+              <sup>{productosCarrito.length > 0 ? productosCarrito.length : ""}</sup>
+            </Nav.Link>
+            {!user ? (
+              <Nav.Link as={Link} to="/login" className="d-flex align-items-center">
+                <FaSignInAlt className="me-1" />
+                Iniciar sesión
+              </Nav.Link>
+            ) : (
+              <NavDropdown title={user.email} id="user-menu" align="end" className="ms-2">
+                <NavDropdown.Item
+                  onClick={handleLogOut}
+                  className="gap-2 text-primary py-1 px-2"
+                  style={{ fontSize: '0.85rem', lineHeight: '1.2' }}
+                >
+                  <FaSignOutAlt className='mb-1' size={14} />&nbsp;
+                  <span>Cerrar sesión</span>
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
+
           </Nav>
 
-          <Nav className="align-items-center">
+          {/* <Nav className="align-items-center">
             <Nav.Link as={Link} to="/carrito">
               <FaShoppingCart />
               <sup>{productosCarrito.length > 0 ? productosCarrito.length : ""}</sup>
@@ -150,7 +172,7 @@ function NavBar() {
 
               </NavDropdown>
             )}
-          </Nav>
+          </Nav> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>
