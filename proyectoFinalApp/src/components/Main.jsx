@@ -76,6 +76,7 @@
 import React from 'react';
 import { Container, Row, Col, Card as RBCard } from 'react-bootstrap';
 import eliasPerfil from '../assets/elias_perfil.jpg';
+import { Helmet } from "react-helmet"
 
 const tecnologias = [
   // {
@@ -108,6 +109,10 @@ const tecnologias = [
 function Main() {
   return (
     <main>
+      <Helmet>
+        <title>Home</title>
+        <meta name="Pagina de inicio de Teotronic" content="Teotronic es una tienda comercial para la familia" />
+      </Helmet>
       <Container className="my-5">
         {/* Presentación */}
         <Row className="align-items-center mb-5">

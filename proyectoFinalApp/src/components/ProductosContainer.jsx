@@ -88,6 +88,7 @@ import { Container, Row, Col, Pagination, Alert } from "react-bootstrap";
 import Spinner from "./Spinner";
 import Card from "./Card";
 import { useProductosContext } from "../contexts/ProductosContext";
+import { Helmet } from "react-helmet"
 
 function ProductosContainer() {
   const { productos, obtenerProductos } = useProductosContext();
@@ -116,6 +117,7 @@ function ProductosContainer() {
         setCargando(false);
         setError("Error al obtener los productos");
       });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const manejarCambioPagina = (nuevaPagina) => {
@@ -129,6 +131,10 @@ function ProductosContainer() {
 
   return (
     <Container className="my-1">
+      <Helmet>
+        <title>Productos</title>
+        <meta name="listado de productos" content="Explicar nuestra variedad de productos" />
+      </Helmet>
       <Row className="g-4">
         {productosVisibles.length === 0 ? (
           <h3>No hay productos para mostrar</h3>

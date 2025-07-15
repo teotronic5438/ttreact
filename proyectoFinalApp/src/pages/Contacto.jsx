@@ -1,9 +1,14 @@
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaWhatsapp, FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
+import { Helmet } from "react-helmet"
 
 function Contacto() {
   return (
     <Container className="my-1">
+      <Helmet>
+        <title>Contacto</title>
+        <meta name="Sucursales de Contacto" content="Elige que sucursal te queda mas cerca" />
+      </Helmet>
       <h2 className="mb-2 text-center">Contacto</h2>
       <p className="text-center">Estamos para ayudarte. Contactanos por cualquiera de nuestros canales o visitanos en nuestras sucursales.</p>
 
