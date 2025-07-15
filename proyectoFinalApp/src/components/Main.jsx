@@ -109,10 +109,6 @@ const tecnologias = [
 function Main() {
   return (
     <main>
-      <Helmet>
-        <title>Home</title>
-        <meta name="Pagina de inicio de Teotronic" content="Teotronic es una tienda comercial para la familia" />
-      </Helmet>
       <Container className="my-5">
         {/* Presentación */}
         <Row className="align-items-center mb-5">

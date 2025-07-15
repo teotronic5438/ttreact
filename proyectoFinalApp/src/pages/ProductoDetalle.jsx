@@ -21,7 +21,8 @@ function ProductoDetalle() {
 
     // Desestructuración con alias
     const { agregarAlCarrito } = useContext(CarritoContext);
-    const {obtenerProducto} = useProductosContext();
+    // const {obtenerProducto} = useProductosContext();
+    const {obtenerProductoFirebase} = useProductosContext();
 
     const { id } = useParams();
     const [producto, setProducto] = useState(null);
@@ -47,7 +48,8 @@ function ProductoDetalle() {
     useEffect(() => {
       // fetch(`https://68150b27225ff1af162af909.mockapi.io/productos/${id}`)
       //   .then((res) => res.json())
-        obtenerProducto(id)
+        // obtenerProducto(id)
+        obtenerProductoFirebase(id)
         .then((data) => {
           setProducto(data)
           setCargando(false);
@@ -60,7 +62,7 @@ function ProductoDetalle() {
           }
           setCargando(false);
         });
-    }, [id, obtenerProducto]);
+    }, [id, obtenerProductoFirebase]);
 
     const handleAgregar = () => {
       if (producto) {
@@ -144,7 +146,8 @@ function ProductoDetalle() {
               </div>
               {admin 
               ? <div>
-                  <Link to={"/admin/editarProducto/" + id}>
+                  {/* <Link to={"/admin/editarProducto/" + id}> */}
+                  <Link to={"/admin/editarProductoFirebase/" + id}>
                     <button className="btn-agregar">
                       Editar Producto
                     </button>

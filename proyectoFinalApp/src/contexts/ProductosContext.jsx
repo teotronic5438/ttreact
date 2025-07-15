@@ -1,5 +1,14 @@
 import { createContext, useContext, useState } from "react";
 // import { data } from "react-router-dom";
+import {
+  crearProducto as crearProductoFirebase,
+  obtenerProductos as obtenerProductosFirebase,
+  obtenerProductoPorId as obtenerProductoFirebase,
+  eliminarProducto as eliminarProductoFirebase,
+  actualizarProducto as actualizarProductoFirebase
+} from '../auth/firebase'; // o donde esté tu archivo firebase.js
+
+
 
 // Crear el contexto
 const ProductosContext = createContext();
@@ -165,7 +174,14 @@ export function ProductosProvider({ children }){
 
 
     return(
-        <ProductosContext.Provider value={{obtenerProductos, productos, agregarProducto, obtenerProducto, editarProducto, eliminarProducto}}>
+        <ProductosContext.Provider 
+            value={{obtenerProductos, productos, setProductos,  agregarProducto, obtenerProducto, editarProducto, eliminarProducto,
+                    crearProductoFirebase,
+                    obtenerProductosFirebase,
+                    obtenerProductoFirebase,
+                    actualizarProductoFirebase,
+                    eliminarProductoFirebase
+            }}>
             {children}
         </ProductosContext.Provider>
     )

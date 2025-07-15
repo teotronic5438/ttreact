@@ -122,8 +122,9 @@ function NavBar() {
             <Nav.Link as={Link} to="/productos">Productos</Nav.Link>
             <Nav.Link as={Link} to="/about">Nosotros</Nav.Link>
             <Nav.Link as={Link} to="/contacto">Contacto</Nav.Link>
-            {admin && <Nav.Link as={Link} to="/admin">Admin</Nav.Link>}
-            {admin && <Nav.Link as={Link} to="/admin/agregarProductos">Agregar Productos</Nav.Link>}
+            {admin && <Nav.Link as={Link} to="/admin">Admin</Nav.Link>} 
+            {/* {admin && <Nav.Link as={Link} to="/admin/agregarProductos">Agregar Productos</Nav.Link>} */}
+            {admin && <Nav.Link as={Link} to="/admin/agregarProductoFirebase">Agregar Productos</Nav.Link>}
             <Nav.Link as={Link} to="/carrito">
               <FaShoppingCart />
               <sup>{productosCarrito.length > 0 ? productosCarrito.length : ""}</sup>

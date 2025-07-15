@@ -4,15 +4,10 @@ import { Helmet } from "react-helmet"
 
 function Contacto() {
   return (
-    <Container className="my-1">
-      <Helmet>
-        <title>Contacto</title>
-        <meta name="Sucursales de Contacto" content="Elige que sucursal te queda mas cerca" />
-      </Helmet>
-      <h2 className="m-0 text-center">Contacto</h2>
+    <Container className="my-3">
+      <h2 className="text-center">Contacto</h2>
       <p className="text-center mb-2">Estamos para ayudarte. Contactanos por cualquiera de nuestros canales o visitanos en nuestras sucursales.</p>
-
-      <Row className="my-2">
+      <Row className="my-5">
         {/* Sucursal Escobar */}
         <Col md={6}>
           <Card className="h-100 shadow d-flex flex-column">

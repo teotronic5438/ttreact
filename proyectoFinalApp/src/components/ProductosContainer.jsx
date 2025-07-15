@@ -91,7 +91,10 @@ import { useProductosContext } from "../contexts/ProductosContext";
 import { Helmet } from "react-helmet"
 
 function ProductosContainer() {
-  const { productos, obtenerProductos } = useProductosContext();
+  // const { productos, obtenerProductos } = useProductosContext(); // esto antes usaba mockapi
+  // ahora uso firebase
+  const {productos, setProductos, obtenerProductosFirebase} = useProductosContext();
+
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
 
@@ -106,19 +109,34 @@ function ProductosContainer() {
     paginaActual * productosPorPagina
   );
 
+  // useEffect(() => {
+  //   obtenerProductos()
+  //     .then(() => {
+  //       setCargando(false);
+  //       setError(null);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error al obtener los productos:", error);
+  //       setCargando(false);
+  //       setError("Error al obtener los productos");
+  //     });
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
   useEffect(() => {
-    obtenerProductos()
-      .then(() => {
+    obtenerProductosFirebase()
+      .then((productosObtenidos) => {
+        setProductos(productosObtenidos); // setea lo que Firebase devuelve
         setCargando(false);
         setError(null);
       })
       .catch((error) => {
-        console.error("Error al obtener los productos:", error);
+        console.error("Error al obtener los productos desde Firebase:", error);
         setCargando(false);
         setError("Error al obtener los productos");
       });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   const manejarCambioPagina = (nuevaPagina) => {
     if (nuevaPagina > 0 && nuevaPagina <= totalPaginas) {
@@ -131,10 +149,6 @@ function ProductosContainer() {
 
   return (
     <Container className="my-1">
-      <Helmet>
-        <title>Productos</title>
-        <meta name="listado de productos" content="Explicar nuestra variedad de productos" />
-      </Helmet>
       <Row className="g-4">
         {productosVisibles.length === 0 ? (
           <h3>No hay productos para mostrar</h3>

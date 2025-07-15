@@ -11,10 +11,12 @@ import Contacto from './pages/Contacto';
 import About from './pages/About';
 import Login from './pages/Login';
 import RutaAdminProtegida from './components/RutaAdminProtegida';
-import RutaProtegidaCarrito from './components/RutaProtegidaCarrito'; // ajustá la ruta
+import RutaProtegidaCarrito from './components/RutaProtegidaCarrito';
 import FormularioProducto from './components/FormularioProducto';
 import RutaAgregarProtegido from './components/RutaAgregarProtegido';
+import RutaAgregarFirebase from './components/RutaAgregarFirebase';
 import FormularioEdicion from './components/FormularioEdicion';
+import FormularioEdicionFirebase from './components/FormularioEdicionFirebase';
 import NavBar from './components/NavBar';
 
 
@@ -69,7 +71,9 @@ function App() {
               <Route path='/admin' element={<RutaAdminProtegida />} />
               {/* <Route path='/admin/agregarProductos' element={<FormularioProducto />} /> */}
               <Route path='/admin/agregarProductos' element={<RutaAgregarProtegido />} />
+              <Route path='/admin/agregarProductoFirebase' element={<RutaAgregarFirebase />} />
               <Route path='admin/editarProducto/:id' element={<FormularioEdicion />} />
+              <Route path='/admin/editarProductoFirebase/:id' element={<FormularioEdicionFirebase />} />
               <Route path='*' element={<h1>404 - Página no encontrada</h1>} />
 
             </Routes>

@@ -127,25 +127,26 @@ import {addDoc, collection, getDocs, getFirestore} from "firebase/firestore";
 // getFirestore(app) obtiene una instancia de Firestore asociada a tu aplicación Firebase
 const db = getFirestore(app)    // db será tu objeto de base de datos principal para interactuar con Firestore
 
-export function crearProducto(nombre, imagen, precio, descripcion){
-    // eslint-disable-next-line no-async-promise-executor
-    return new Promise(async (res, rej) => {
-        try{
-            const docRef = await addDoc(collection(db, "productos"), {
-                nombre: nombre,
-                imagen: imagen,
-                precio: precio,
-                descripcion: descripcion
-            });
+export function crearProducto(producto) {
+  // eslint-disable-next-line no-async-promise-executor
+  return new Promise(async (res, rej) => {
+    try {
+      const docRef = await addDoc(collection(db, "productos"), {
+        nombre: producto.nombre,
+        imagen: producto.imagen,
+        precio: producto.precio,
+        descripcion: producto.descripcion
+      });
 
-            console.log("Docuemnto written with ID: ", docRef.id);
-            res(docRef)
-        } catch(e) {
-            console.error("Error adding document: ", e)
-            rej(e)
-        }
-    });
+      console.log("Documento escrito con ID: ", docRef.id);
+      res(docRef);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+      rej(e);
+    }
+  });
 }
+
 
 export function obtenerProductos(){
     return(
@@ -153,14 +154,14 @@ export function obtenerProductos(){
         new Promise(async (res, rej) => {
             try{
                 const querySnapshot = await getDocs(collection(db, 'productos'));
-                console.log(querySnapshot, "respuesta al getDocs");
+                // console.log(querySnapshot, "respuesta al getDocs");
                 
 
                 const resultados = querySnapshot.docs.map(doc => {
-                    console.log(doc, "doc sin ejecutar metodo data()");
+                    // console.log(doc, "doc sin ejecutar metodo data()");
                     
                     const data = doc.data();
-                    console.log(data, "doc con data extraido");
+                    // console.log(data, "doc con data extraido");
                     
                     return{
                         id: doc.id,
@@ -190,14 +191,17 @@ export function obtenerProductoPorId(id) {
       const docSnap = await getDoc(docRef);
 
       if (docSnap.exists()) {
+        // console.log("Documento data: ", docSnap.data());
+        
         const data = docSnap.data();
-        res({
+        const producto = {
           id: docSnap.id,
           nombre: data.nombre,
           imagen: data.imagen,
           precio: data.precio,
           descripcion: data.descripcion
-        });
+        };
+        res(producto)
       } else {
         rej(new Error("El producto no existe"));
       }
@@ -215,7 +219,7 @@ export function eliminarProducto(id) {
   return new Promise(async (res, rej) => {
     try {
       await deleteDoc(doc(db, "productos", id));
-      console.log(`Producto con ID ${id} eliminado correctamente.`);
+      // console.log(`Producto con ID ${id} eliminado correctamente.`);
       res();
     } catch (error) {
       console.error("Error al eliminar producto:", error);
@@ -232,7 +236,7 @@ export function actualizarProducto(id, datosActualizados) {
     try {
       const docRef = doc(db, "productos", id);
       await updateDoc(docRef, datosActualizados);
-      console.log(`Producto con ID ${id} actualizado correctamente.`);
+      // console.log(`Producto con ID ${id} actualizado correctamente.`);
       res();
     } catch (error) {
       console.error("Error al actualizar producto:", error);
