@@ -160,7 +160,9 @@ function Login() {
                         
                         <button type="submit">Iniciar Sesión</button>
                     </form>
-                    <p className="pielinkform">¿No tienes cuenta? <a onClick={handleShow}>Registrate</a></p>
+                    <p className="pielinkform">¿No tienes cuenta? 
+                        <a className="text-primary cursor-pointer" onClick={handleShow}>Registrate</a>
+                    </p>
                 </div>
             </div>
         )
@@ -196,7 +198,9 @@ function Login() {
                         
                         <button className="btn-registrarse" type="submit">Registrarse</button>
                     </form>
-                    <p className="pielinkform">¿Ya tienes cuenta? <a className="primary" onClick={handleShow}>Inicia Sesion</a></p>
+                    <p className="pielinkform">¿Ya tienes cuenta? 
+                        <a className="text-success cursor-pointer" onClick={handleShow}>Inicia Sesion</a>
+                    </p>
                 </div>
             </div>
         )

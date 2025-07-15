@@ -1,9 +1,8 @@
 // import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css';
-import Header from './components/Header';
-import Nav from './components/NavBar';
-import Footer from './components/Footer';
+// import Header from './components/Header';
+// import Nav from './components/NavBar';
 import Home from './pages/Home';
 import Productos from './pages/Productos';
 import CarritoPage from './pages/CarritoPage';
@@ -49,7 +48,7 @@ function App() {
   return (
     <div className="app-container">
       <Router>
-          <Header />
+          {/* <Header /> */}
           <NavBar />
           <div className="main-content">
             <Routes>
@@ -75,8 +74,6 @@ function App() {
 
             </Routes>
           </div>
-
-        <Footer />
       </Router>
     </div>
   );
