@@ -19,7 +19,6 @@ const firebaseConfig = {
 
 
 // Se inicializa Firebase con la configuración
-// eslint-disable-next-line no-unused-vars
 const app = initializeApp(firebaseConfig);
 
 
@@ -165,7 +164,7 @@ export function obtenerProductos(){
                     
                     return{
                         id: doc.id,
-                        name: data.name,
+                        nombre: data.nombre,
                         imagen: data.imagen,
                         precio: data.precio,
                         descripcion: data.descripcion
@@ -179,4 +178,65 @@ export function obtenerProductos(){
             }
         })
     );
+}
+
+import { doc, getDoc, deleteDoc, updateDoc } from "firebase/firestore";
+
+export function obtenerProductoPorId(id) {
+  // eslint-disable-next-line no-async-promise-executor
+  return new Promise(async (res, rej) => {
+    try {
+      const docRef = doc(db, "productos", id);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const data = docSnap.data();
+        res({
+          id: docSnap.id,
+          nombre: data.nombre,
+          imagen: data.imagen,
+          precio: data.precio,
+          descripcion: data.descripcion
+        });
+      } else {
+        rej(new Error("El producto no existe"));
+      }
+    } catch (error) {
+      console.error("Error al obtener producto por ID:", error);
+      rej(error);
+    }
+  });
+}
+
+
+
+export function eliminarProducto(id) {
+  // eslint-disable-next-line no-async-promise-executor
+  return new Promise(async (res, rej) => {
+    try {
+      await deleteDoc(doc(db, "productos", id));
+      console.log(`Producto con ID ${id} eliminado correctamente.`);
+      res();
+    } catch (error) {
+      console.error("Error al eliminar producto:", error);
+      rej(error);
+    }
+  });
+}
+
+
+
+export function actualizarProducto(id, datosActualizados) {
+  // eslint-disable-next-line no-async-promise-executor
+  return new Promise(async (res, rej) => {
+    try {
+      const docRef = doc(db, "productos", id);
+      await updateDoc(docRef, datosActualizados);
+      console.log(`Producto con ID ${id} actualizado correctamente.`);
+      res();
+    } catch (error) {
+      console.error("Error al actualizar producto:", error);
+      rej(error);
+    }
+  });
 }

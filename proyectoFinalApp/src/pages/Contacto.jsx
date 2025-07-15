@@ -9,10 +9,10 @@ function Contacto() {
         <title>Contacto</title>
         <meta name="Sucursales de Contacto" content="Elige que sucursal te queda mas cerca" />
       </Helmet>
-      <h2 className="mb-2 text-center">Contacto</h2>
-      <p className="text-center">Estamos para ayudarte. Contactanos por cualquiera de nuestros canales o visitanos en nuestras sucursales.</p>
+      <h2 className="m-0 text-center">Contacto</h2>
+      <p className="text-center mb-2">Estamos para ayudarte. Contactanos por cualquiera de nuestros canales o visitanos en nuestras sucursales.</p>
 
-      <Row className="my-5">
+      <Row className="my-2">
         {/* Sucursal Escobar */}
         <Col md={6}>
           <Card className="h-100 shadow d-flex flex-column">
@@ -20,7 +20,7 @@ function Contacto() {
               <Card.Title><FaMapMarkerAlt className="me-2" />Sucursal Escobar</Card.Title>
               <Card.Text>
                 Av. de los Inmigrantes 2431<br />
-                B1625 Belén de Escobar, Provincia de Buenos Aires<br />
+                {/* B1625 Belén de Escobar, Provincia de Buenos Aires<br /> */}
                 <strong>Horario:</strong> Sábados y Domingos de 8 a 17 hs<br />
                 <strong>Tel:</strong>{" "}
                 <a href="https://wa.me/541123439926" target="_blank" rel="noopener noreferrer">
@@ -34,7 +34,7 @@ function Contacto() {
                 </a>
               </Card.Text>
 
-              <div className="ratio ratio-4x3 mapa-container mb-3">
+              <div className="ratio ratio-4x3 mapa-container mb-2" style={{height: 350}}>
                 <iframe
                   src="https://www.google.com/maps?q=Av.+de+los+Inmigrantes+2431,+Bel%C3%A9n+de+Escobar,+Provincia+de+Buenos+Aires&output=embed"
                   allowFullScreen
@@ -65,7 +65,7 @@ function Contacto() {
               <Card.Title><FaMapMarkerAlt className="me-2" />Sucursal Lugano</Card.Title>
               <Card.Text>
                 Saladillo 5438<br />
-                B1439 Villa Lugano, Ciudad Autónoma de Buenos Aires<br />
+                {/* B1439 Villa Lugano, Ciudad Autónoma de Buenos Aires<br /> */}
                 <strong>Horario:</strong> Lunes a Viernes de 9 a 18 hs<br />
                 <strong>Tel:</strong>{" "}
                 <a href="https://wa.me/541123439926" target="_blank" rel="noopener noreferrer">
@@ -79,7 +79,7 @@ function Contacto() {
                 </a>
               </Card.Text>
 
-              <div className="ratio ratio-4x3 mapa-container mb-3">
+              <div className="ratio ratio-4x3 mapa-container mb-2" style={{height: 350}}>
                 <iframe
                   src="https://www.google.com/maps?q=Saladillo+5438,+Villa+Lugano&output=embed"
                   allowFullScreen
