@@ -97,17 +97,31 @@ function ProductosContainer() {
 
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState(null);
+  const [busqueda, setBusqueda] = useState("");
 
   // Paginación
   const [paginaActual, setPaginaActual] = useState(1);
   const productosPorPagina = 8;
 
-  const totalPaginas = Math.ceil(productos.length / productosPorPagina);
+  // const totalPaginas = Math.ceil(productos.length / productosPorPagina);
 
-  const productosVisibles = productos.slice(
+
+  // const productosVisibles = productos.slice(
+  //   (paginaActual - 1) * productosPorPagina,
+  //   paginaActual * productosPorPagina
+  // );
+
+  const productosFiltrados = productos.filter((producto) =>
+    producto.nombre.toLowerCase().includes(busqueda.toLowerCase())
+  );
+
+  const totalPaginas = Math.ceil(productosFiltrados.length / productosPorPagina);
+
+  const productosVisibles = productosFiltrados.slice(
     (paginaActual - 1) * productosPorPagina,
     paginaActual * productosPorPagina
   );
+
 
   // useEffect(() => {
   //   obtenerProductos()
@@ -126,7 +140,7 @@ function ProductosContainer() {
   useEffect(() => {
     obtenerProductosFirebase()
       .then((productosObtenidos) => {
-        setProductos(productosObtenidos); // setea lo que Firebase devuelve
+        setProductos(productosObtenidos);
         setCargando(false);
         setError(null);
       })
@@ -150,6 +164,29 @@ function ProductosContainer() {
 
   return (
     <Container className="my-1">
+
+      {/* Formulario de busqueda */}
+      <Row className="mb-4">
+        <Col xs={12} md={6} className="mx-auto">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="🔍 Buscar producto..."
+            value={busqueda}
+            onChange={(e) => {
+              setBusqueda(e.target.value);
+              setPaginaActual(1); // Reiniciar a la página 1 al buscar
+            }}
+          />
+        </Col>
+        {busqueda.trim() !== "" && (
+          <div className="text-center text-muted my-3">
+            Mostrando resultados para: <strong>{busqueda}</strong>
+          </div>
+        )}
+
+      </Row>
+
       <Row className="g-4">
         {productosVisibles.length === 0 ? (
           <h3>No hay productos para mostrar</h3>
