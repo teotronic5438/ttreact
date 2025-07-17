@@ -148,15 +148,56 @@ export function crearProducto(producto) {
 }
 
 
+// export function obtenerProductos() {
+//     return new Promise(async (res, rej) => {
+//         try {
+//             // 1. Intentar obtener productos desde Firebase
+//             const productosFirebase = await obtenerProductosFirebase();
+
+//             if (productosFirebase.length > 0) {
+//                 setProductos(productosFirebase);
+//                 return res(productosFirebase);
+//             }
+
+//             // 2. Si Firebase está vacío, obtener desde la API externa
+//             const respuesta = await fetch("https://fakestoreapi.com/products");
+//             const productosApi = await respuesta.json();
+
+//             // 3. Insertar cada producto en Firebase
+//             await Promise.all(
+//                 productosApi.map((productoApi) => {
+//                     const productoFormateado = {
+//                         nombre: productoApi.title,
+//                         imagen: productoApi.image,
+//                         precio: productoApi.price,
+//                         descripcion: productoApi.description,
+//                     };
+//                     return crearProducto(productoFormateado);
+//                 })
+//             );
+
+//             // 4. Obtener productos actualizados desde Firebase
+//             const productosActualizados = await obtenerProductosFirebase();
+//             setProductos(productosActualizados);
+//             res(productosActualizados);
+//         } catch (error) {
+//             console.error("Error en obtenerProductos:", error);
+//             rej(error);
+//         }
+//     });
+// }
+
+
 export function obtenerProductos(){
     return(
         // eslint-disable-next-line no-async-promise-executor
         new Promise(async (res, rej) => {
             try{
+
+                // 1. Intentar obtener productos desde Firebase
                 const querySnapshot = await getDocs(collection(db, 'productos'));
                 // console.log(querySnapshot, "respuesta al getDocs");
                 
-
                 const resultados = querySnapshot.docs.map(doc => {
                     // console.log(doc, "doc sin ejecutar metodo data()");
                     
@@ -172,7 +213,31 @@ export function obtenerProductos(){
                     };
                 });
 
-                res(resultados)
+                if (resultados.length > 0) {
+                  return res(resultados);
+                }
+                
+                // 2. Si Firebase está vacío, obtener desde la API externa
+                const respuesta = await fetch("https://fakestoreapi.com/products");
+                const productosApi = await respuesta.json();
+                const productosActualizados = []
+
+                // 3. Insertar cada producto en Firebase
+                await Promise.all(
+                    productosApi.map((productoApi) => {
+                        const productoFormateado = {
+                            nombre: productoApi.title,
+                            imagen: productoApi.image,
+                            precio: productoApi.price,
+                            descripcion: productoApi.description,
+                        };
+                        productosActualizados.append(productoFormateado)
+                        return crearProducto(productoFormateado);
+                    })
+                );
+                
+                // 4. Obtener productos actualizados desde Firebase
+                res(productosActualizados);
             } catch(error) {
                 console.error("Error al obtener los productos: " + error)
                 rej(error)

@@ -17,7 +17,7 @@ import Swal from 'sweetalert2';
 function ProductoDetalle() {
 
     const {admin} = useAuthContext();
-    const { eliminarProducto } = useProductosContext(); 
+    const { eliminarProductoFirebase } = useProductosContext(); 
 
     // Desestructuración con alias
     const { agregarAlCarrito } = useContext(CarritoContext);
@@ -88,7 +88,7 @@ function ProductoDetalle() {
           cancelButtonText: 'Cancelar'
       }).then((result) => {
           if (result.isConfirmed) {
-            eliminarProducto(id)
+            eliminarProductoFirebase(id)
               .then(() => {
                 Swal.fire({
                   title: 'Eliminado',

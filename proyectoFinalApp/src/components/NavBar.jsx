@@ -130,8 +130,8 @@ function NavBar() {
               <sup>{productosCarrito.length > 0 ? productosCarrito.length : ""}</sup>
             </Nav.Link>
             {!user ? (
-              <Nav.Link as={Link} to="/login" className="d-flex align-items-center">
-                <FaSignInAlt className="me-1" />
+              <Nav.Link as={Link} to="/login">
+                <FaSignInAlt className="me-1" />&nbsp;
                 Iniciar sesión
               </Nav.Link>
             ) : (

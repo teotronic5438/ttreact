@@ -122,6 +122,7 @@ function ProductosContainer() {
   //     });
   // // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, []);
+  
   useEffect(() => {
     obtenerProductosFirebase()
       .then((productosObtenidos) => {
