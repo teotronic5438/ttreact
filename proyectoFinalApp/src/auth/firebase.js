@@ -217,12 +217,12 @@ export function obtenerProductos(){
                   return res(resultados);
                 }
                 
-                // 2. Si Firebase está vacío, obtener desde la API externa
+                // Si Firebase está vacío, obtengo datos desde fakestore
                 const respuesta = await fetch("https://fakestoreapi.com/products");
                 const productosApi = await respuesta.json();
                 const productosActualizados = []
 
-                // 3. Insertar cada producto en Firebase
+                // Inserto cada producto en Firebase
                 await Promise.all(
                     productosApi.map((productoApi) => {
                         const productoFormateado = {
